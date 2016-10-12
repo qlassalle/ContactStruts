@@ -1,0 +1,34 @@
+th, td
+{
+    text-align: center;
+}
+
+.navbar
+{
+    margin-bottom:0;
+    padding-top:15px;
+    text-align: center;
+    position: relative;
+}
+
+.validerForm
+{
+    margin-top:10px;
+}
+
+.formName
+{
+    margin-top:25px;
+    margin-bottom:15px;
+    text-align: center;
+}
+
+.inputForm
+{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+label
+{
+    margin-top:10px;
+}

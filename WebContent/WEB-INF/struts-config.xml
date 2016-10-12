@@ -6,20 +6,51 @@
 
 <struts-config>
 	<form-beans>
-		<form-bean name="AddContactValidationForm" type="org.lip6.struts.actionForm.AddContactValidationForm"/>
+		<form-bean name="AddContactValidationForm" type="actionForm.AddContactValidationForm"/>
+		<form-bean name="UpdateContactValidationForm" type="actionForm.UpdateContactValidationForm"/>	
+		<form-bean name="LoginValidationForm" type="actionForm.LoginValidationForm"/>
 	</form-beans>
+	
 	<action-mappings>
+		
+		<action path = "/Login" type ="servletAction.LoginAction"
+				name = "LoginValidationForm" scope = "request"
+				input = "/pages/login.jsp">
+			<forward name = "success" path ="/pages/main.jsp"/>
+			<forward name = "error" path ="/pages/login.jsp"/>
+		</action>
+		
+		<action path = "/Accueil" type ="servletAction.AccueilAction">
+			<forward name = "success" path="/pages/main.jsp"/>
+		</action>	
+	
+		<action path="/createContact" forward="/pages/createContact.jsp"/>
+		
+		<action path="/updateContact" forward="/pages/updateContact.jsp"/>
+	
+		<action path="/deleteContact" forward="/pages/main.jsp"/>
+			
+		<action path="/index" forward="/pages/main.jsp"/>
+	
+		<action path="/AddContact" 
+					type="servletAction.AddContactAction"
+					name="AddContactValidationForm" scope="request"
+					input="/pages/createContact.jsp">
+				<forward name="success" path="/pages/success.jsp" />
+				<forward name="error" path="/pages/error.jsp" />
+		</action>
+		
+		<action path = "/UpdateContact" type = "servletAction.UpdateContactAction"
+					name = "UpdateContactValidationForm" scope ="request"
+					input = "/pages/updateContact.jsp">
+				<forward name = "success" path = "/pages/main.jsp"/>
+				<forward name = "error" path = "/pages/error.jsp"/>		
+		</action>
+		
+		<action path = "/DeleteContact" type ="servletAction.DeleteContactAction">
+			<forward name = "success" path="/pages/main.jsp"/>
+		</action>	
 
-	<action path="/ContactCreation" forward="/pages/creationContact.jsp" />
-
-	<action path="/AddContact" 
-				type="org.lip6.struts.servletAction.AddContactAction"
-				name="AddContactValidationForm" scope="request" 
-				
-				input="/pages/contactCreation.jsp">
-			<forward name="success" path="/pages/success.jsp" />
-			<forward name="error" path="/pages/error.jsp" />
-	</action>
 	</action-mappings>
 
 <!-- ========== Ressources de definitions de messages =========================== -->
