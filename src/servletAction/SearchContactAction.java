@@ -8,7 +8,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import actionForm.SearchContactValidationForm;
+import actionForm.contact.SearchContactValidationForm;
 import domain.DAOContact;
 
 public class SearchContactAction extends Action{

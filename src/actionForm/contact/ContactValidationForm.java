@@ -1,4 +1,4 @@
-package actionForm;
+package actionForm.contact;
 
 import javax.servlet.http.HttpServletRequest;
 

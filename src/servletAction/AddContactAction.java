@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import actionForm.AddContactValidationForm;
+import actionForm.contact.AddContactValidationForm;
 import domain.DAOContact;
 
 public class AddContactAction extends Action {

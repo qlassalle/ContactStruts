@@ -6,9 +6,9 @@
 
 <struts-config>
 	<form-beans>
-		<form-bean name="AddContactValidationForm" type="actionForm.AddContactValidationForm"/>
-		<form-bean name="UpdateContactValidationForm" type="actionForm.UpdateContactValidationForm"/>
-		<form-bean name="SearchContactValidationForm" type="actionForm.SearchContactValidationForm"/>			
+		<form-bean name="AddContactValidationForm" type="actionForm.contact.AddContactValidationForm"/>
+		<form-bean name="UpdateContactValidationForm" type="actionForm.contact.UpdateContactValidationForm"/>
+		<form-bean name="SearchContactValidationForm" type="actionForm.contact.SearchContactValidationForm"/>			
 		<form-bean name="LoginValidationForm" type="actionForm.LoginValidationForm"/>
 	</form-beans>
 	
@@ -39,7 +39,7 @@
 					type="servletAction.AddContactAction"
 					name="AddContactValidationForm" scope="request"
 					input="/pages/createContact.jsp">
-				<forward name="success" path="/pages/success.jsp" />
+				<forward name="success" path="/pages/main.jsp" />
 				<forward name="error" path="/pages/error.jsp" />
 		</action>
 		
