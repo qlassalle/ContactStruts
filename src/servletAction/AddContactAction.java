@@ -19,7 +19,8 @@ public class AddContactAction extends Action {
 	
 	public ActionForward execute(final ActionMapping pMapping,
 			ActionForm pForm, final HttpServletRequest pRequest,
-			final HttpServletResponse pResponse) {
+			final HttpServletResponse pResponse) 
+	{
 		
 		final AddContactValidationForm lForm=(AddContactValidationForm)pForm;
 		
@@ -28,17 +29,10 @@ public class AddContactAction extends Action {
 		final String email = lForm.getEmail();
 
 		// create a new Contact
-		final DAOContact lDAOContact = new DAOContact();
-		final String lError = lDAOContact.save(firstName, lastName, email);
+		final DAOContact daoc = new DAOContact();
+		final String error = daoc.save(firstName, lastName, email);
 		
-		
-		if(lError == null) {
-			// if no exception is raised,  forward "success"
-			return pMapping.findForward("success");
-		}
-		else {
-			// If any exception, return the "error" forward
-			return pMapping.findForward("error");
-		}
+		pRequest.setAttribute("lesContacts", daoc.getAllContacts());
+		return error == null ? pMapping.findForward("success") : pMapping.findForward("error");
 	}
 }

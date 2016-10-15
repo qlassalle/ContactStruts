@@ -7,7 +7,8 @@
 <struts-config>
 	<form-beans>
 		<form-bean name="AddContactValidationForm" type="actionForm.AddContactValidationForm"/>
-		<form-bean name="UpdateContactValidationForm" type="actionForm.UpdateContactValidationForm"/>	
+		<form-bean name="UpdateContactValidationForm" type="actionForm.UpdateContactValidationForm"/>
+		<form-bean name="SearchContactValidationForm" type="actionForm.SearchContactValidationForm"/>			
 		<form-bean name="LoginValidationForm" type="actionForm.LoginValidationForm"/>
 	</form-beans>
 	
@@ -29,7 +30,9 @@
 		<action path="/updateContact" forward="/pages/updateContact.jsp"/>
 	
 		<action path="/deleteContact" forward="/pages/main.jsp"/>
-			
+		
+		<action path="/searchContact" forward="/pages/main.jsp"/>
+				
 		<action path="/index" forward="/pages/main.jsp"/>
 	
 		<action path="/AddContact" 
@@ -51,7 +54,13 @@
 			<forward name = "success" path="/pages/main.jsp"/>
 		</action>	
 
-	</action-mappings>
+		<action path = "/SearchContact" type ="servletAction.SearchContactAction"
+				name = "SearchContactValidationForm" scope = "request"
+				input = "/pages/main.jsp">
+			<forward name = "success" path="/pages/main.jsp"/>
+		</action>
+			
+		</action-mappings>
 
 <!-- ========== Ressources de definitions de messages =========================== -->
 	<message-resources parameter="Resources" />

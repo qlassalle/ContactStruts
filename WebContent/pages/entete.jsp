@@ -26,12 +26,13 @@
             </li>
         </ul>
         <div class="col-md-6">
-            <form class="navbar-form inline-form">
+            <html:form action="/SearchContact" styleClass="navbar-form inline-form" method = "post">
                 <div class="form-group">
-                    <input type="search" class="input-md form-control" placeholder="Nom du contact">
-                    <button type="submit" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-eye-open"></span> Rechercher un contact</button>
+                    <html:text property ="firstName" styleClass="input-md form-control"/>
+                    <!--<html:submit styleClass="btn btn-primary btn-md"><span class="glyphicon glyphicon-eye-open"></span> Rechercher un contact</html:submit>-->
+                    <html:submit styleClass="btn btn-primary btn-md" value = "Rechercher un contact"/>
                 </div>
-            </form>
+            </html:form>
         </div>
     </div>
 </nav>

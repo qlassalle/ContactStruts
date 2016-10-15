@@ -14,7 +14,10 @@
 			<h1><bean:message key ="main.listContact"/></h1>
 		</div>
 		<div class="col-md-offset-3 col-md-1 add-btn">
-			<h1><html:link action="createContact"><message:bean key="add.contact"/></html:link><span class = "glyphicon glyphicon-plus-sign"></a></span></h1>
+			<h1>
+				<html:link action="createContact.jsp"><message:bean key="add.contact"/>
+				<span class = "glyphicon glyphicon-plus-sign"></html:link></span>
+			</h1>
 		</div>
 	</div>
 	<table class = "table table-striped table-bordered">
@@ -41,7 +44,8 @@
 								<span class = "glyphicon glyphicon-pencil"></span>
 							</html:link>
 						</td>
-						<td><html:link action ="/DeleteContact">
+						<td>
+							<html:link action ="/DeleteContact">
 								<html:param name = "id"><%= contact.getId()%></html:param>
 								<span class="glyphicon glyphicon-remove"></span>
 							</html:link>

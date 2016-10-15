@@ -19,7 +19,7 @@
 <%
 	DAOContact daoc = new DAOContact();
 	int id = Integer.valueOf(request.getParameter("id")); 
-	Contact c = daoc.getContact(id);
+	Contact c = daoc.getContactById(id);
 	String sid = String.valueOf(id);
 %>	
 		<div class="row">

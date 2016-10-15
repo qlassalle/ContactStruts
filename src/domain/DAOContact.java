@@ -61,7 +61,6 @@ public class DAOContact {
 	}
 
 	public String delete(String id) {
-		ResultSet result = null;
 		String req = "delete from contact where id = ?";
 		try {
 			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
@@ -75,8 +74,8 @@ public class DAOContact {
 		return null;
 	}
 
-	public Contact research(int id) {
-		return getContact(id);
+	public List<Contact> getContactByFirstName(String firstName) {
+		return getContact(firstName);
 	}
 
 	public List<Contact> getAllContacts() {
@@ -100,10 +99,30 @@ public class DAOContact {
 		return lesContacts;
 	}
 
-	public Contact getContact(int id) {
+	public List<Contact> getContact(String firstName) {
+		List<Contact> lesContacts = new ArrayList<Contact>();
 		Contact c = null;
 		try {
-			String req = "select * from contact where id = ?";
+			String req = "select * from contact where nom like ?";
+			ResultSet result;
+			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
+				stmt.setString(1, "%" + firstName + "%");
+				result = stmt.executeQuery();
+				while (result.next()) {
+					c = new Contact(result.getInt(1), result.getString(2), result.getString(3), result.getString(4));
+					lesContacts.add(c);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return lesContacts;
+	}
+	
+	public Contact getContactById(int id) {
+		Contact c = null;
+		try {
+			String req = "select * from contact where id like ?";
 			ResultSet result;
 			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
 				stmt.setInt(1, id);
