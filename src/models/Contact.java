@@ -1,49 +1,77 @@
 package models;
 
+import java.util.List;
+
 public class Contact {
-
+	
 	private long id;
-	private String nom, prenom, email;
-
+	private String firstName, lastName, email;
+	private List<PhoneNumber> phones;
+	private List<Groupe> books;
+	private Address address;
 	
-	
-	public Contact(long id, String nom, String prenom, String email) {
+	public Contact(long id, String firstName, String lastName, String email) {
+		super();
 		this.id = id;
-		this.nom = nom;
-		this.prenom = prenom;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
+	}
+
+	public void setId(long value) {
+		this.id = value;
 	}
 
 	public long getId() {
-		return id;
+		return this.id;
+	}
+	
+	public void setFirstName(String value) {
+		this.firstName = value;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public String getFirstName() {
+		return this.firstName;
+	}
+	
+	public void setLastName(String value) {
+		this.lastName = value;
 	}
 
-	public String getNom() {
-		return nom;
+	public String getLastName() {
+		return this.lastName;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
+	public void setEmail(String value) {
+		this.email = value;
 	}
 
 	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+		return this.email;
 	}
 	
+	public List<PhoneNumber> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(List<PhoneNumber> phones) {
+		this.phones = phones;
+	}
+
+	public List<Groupe> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Groupe> books) {
+		this.books = books;
+	}
+
+	public void setAddress(Address value) {
+		this.address = value;
+	}
+
+	public Address getAddress() {
+		return this.address;
+	}
+
 }

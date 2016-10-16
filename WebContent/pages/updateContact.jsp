@@ -34,11 +34,11 @@
 							</div>
 							<label class="col-md-4 control-label">Nom</label>
 							<div class="col-md-8">
-								<html:text styleClass="form-control inputForm" property = "lastName" value = '<%= c.getNom() %>'/>
+								<html:text styleClass="form-control inputForm" property = "lastName" value = '<%= c.getLastName() %>'/>
 							</div>
 							<label class="col-md-4 control-label">Prenom</label>
 							<div class="col-md-8">
-								<html:text styleClass="form-control inputForm" property = "firstName" value = '<%= c.getPrenom() %>'/>
+								<html:text styleClass="form-control inputForm" property = "firstName" value = '<%= c.getFirstName() %>'/>
 							</div>
 							<label class="col-md-4 control-label">Mail</label>
 							<div class="col-md-8">

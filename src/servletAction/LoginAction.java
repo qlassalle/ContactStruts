@@ -8,7 +8,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import actionForm.LoginValidationForm;
+import actionForm.global.LoginValidationForm;
 import domain.DAOContact;
 
 public class LoginAction extends Action{
@@ -22,9 +22,8 @@ public class LoginAction extends Action{
 		
 		final String user = lValidationForm.getName();
 		final String password = lValidationForm.getPassword();
+		AccueilAction accueil = new AccueilAction(); 
 		
-		DAOContact daoc = new DAOContact();
-		request.setAttribute("lesContacts", daoc.getAllContacts());
-		return user.equals(password) ? mapping.findForward("success") : mapping.findForward("error");
+		return user.equals(password) ? accueil.execute(mapping, lValidationForm, request, response) : mapping.findForward("error");
 	}
 }

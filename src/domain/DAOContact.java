@@ -1,7 +1,6 @@
 package domain;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,23 +10,21 @@ import java.util.List;
 
 import models.Contact;
 
-public class DAOContact {
+public class DAOContact extends GlobalConnection{
 
-	private Connection connexion = null;
-	private final String url = "jdbc:mysql://localhost:8889/contact";
-	private final String urlWindows = "jdbc:mysql://localhost:3306/contact";
-	private final String utilisateur = "root";
-	private final String motDePasse = "root";
-	private final String motDePasseWindows = "";
+	Connection connection;
+	GlobalConnection globalConnection;
 
 	public DAOContact() {
-		connexion = getConnection();
+		globalConnection = new GlobalConnection();
+		connection = globalConnection.getConnection();
 	}
 
 	public String save(String nom, String prenom, String email) {
+		connection = globalConnection.checkConnection(connection);
 		Statement stmt;
 		try {
-			stmt = connexion.createStatement();
+			stmt = connection.createStatement();
 			System.out.println("insert into contact(nom, prenom, email) values(\"" + nom + "\",\""
 					+ prenom + "\",\"" + email + "\");");
 			stmt.executeUpdate("insert into contact(nom, prenom, email) values(\"" + nom + "\",\""
@@ -38,14 +35,18 @@ public class DAOContact {
 		} catch (SQLException e) {
 			return e.getMessage();
 		}
+		finally {
+			closeConnection(connection);
+		}
 	}
 
 	public String update(int id, String nom, String prenom, String email) {
+		connection = globalConnection.checkConnection(connection);
 		int result = 0;
 		String req = "update contact set id = ?, nom = ?, prenom = ?, email = ? where id = ?";
 		System.out.println("id:" + id);
 		try {
-			PreparedStatement stmt = connexion.prepareStatement(req);
+			PreparedStatement stmt = connection.prepareStatement(req);
 			stmt.setInt(1, id);
 			stmt.setString(2, nom);
 			stmt.setString(3, prenom);
@@ -53,23 +54,30 @@ public class DAOContact {
 			stmt.setInt(5, id);
 			result = stmt.executeUpdate();
 			stmt.close();
-			// connexion.close();
+			// connection.close();
 			return null;
 		} catch (SQLException e) {
 			return e.getMessage();
 		}
+		finally {
+			closeConnection(connection);
+		}
 	}
 
 	public String delete(String id) {
+		connection = globalConnection.checkConnection(connection);
 		String req = "delete from contact where id = ?";
 		try {
-			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
+			try (PreparedStatement stmt = connection.prepareStatement(req)) {
 				stmt.setString(1, id);
 				stmt.executeUpdate();
 				stmt.close();
 			}
 		} catch (SQLException sqle) {
 			return sqle.getMessage();
+		}
+		finally {
+			closeConnection(connection);
 		}
 		return null;
 	}
@@ -79,10 +87,11 @@ public class DAOContact {
 	}
 
 	public List<Contact> getAllContacts() {
+		connection = globalConnection.checkConnection(connection);
 		List<Contact> lesContacts = new ArrayList<Contact>();
 		ResultSet result = null;
 		try {
-			try (Statement stmt = connexion.createStatement()) {
+			try (Statement stmt = connection.createStatement()) {
 				result = stmt.executeQuery("select * from contact ORDER BY nom ASC");
 				while (result.next()) {
 					lesContacts.add(new Contact(result.getLong(1), result.getString(2), result.getString(3),
@@ -96,16 +105,20 @@ public class DAOContact {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			closeConnection(connection);
+		}
 		return lesContacts;
 	}
 
 	public List<Contact> getContact(String firstName) {
+		connection = globalConnection.checkConnection(connection);
 		List<Contact> lesContacts = new ArrayList<Contact>();
 		Contact c = null;
 		try {
 			String req = "select * from contact where nom like ?";
 			ResultSet result;
-			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
+			try (PreparedStatement stmt = connection.prepareStatement(req)) {
 				stmt.setString(1, "%" + firstName + "%");
 				result = stmt.executeQuery();
 				while (result.next()) {
@@ -116,15 +129,19 @@ public class DAOContact {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			closeConnection(connection);
+		}
 		return lesContacts;
 	}
 	
 	public Contact getContactById(int id) {
+		connection = globalConnection.checkConnection(connection);
 		Contact c = null;
 		try {
 			String req = "select * from contact where id like ?";
 			ResultSet result;
-			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
+			try (PreparedStatement stmt = connection.prepareStatement(req)) {
 				stmt.setInt(1, id);
 				result = stmt.executeQuery();
 				while (result.next()) {
@@ -134,27 +151,9 @@ public class DAOContact {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			closeConnection(connection);
+		}
 		return c;
-	}
-
-	private Connection getConnection() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Erreur lors du chargement : le driver n'a pas été trouvé dans le classpath ! <br/>"
-					+ e.getMessage());
-		}
-		Connection connexion = null;
-		try {
-			connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
-			System.out.println("Connecté à la bdd");
-		} catch (SQLException e) {
-			try {
-				connexion = DriverManager.getConnection(urlWindows, utilisateur, motDePasseWindows);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		}
-		return connexion;
 	}
 }

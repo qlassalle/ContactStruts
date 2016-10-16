@@ -18,11 +18,14 @@
 <nav class="navbar navbar-default">
     <div class="row">
         <ul class="nav navbar-nav col-md-6">
-            <li class="col-md-6">
+            <li class="col-md-4">
                 <html:link action="/Accueil"><bean:message key="main.accueil"/></html:link>
             </li>
-            <li class="col-md-6">
+            <li class="col-md-4">
                 <html:link action="createContact.jsp"><bean:message key="main.ajouter"/></html:link>
+            </li>
+            <li class="col-md-4">
+            	<html:link action = "groupe/createGroupe.jsp"><bean:message key="groupe.ajouter"/></html:link>
             </li>
         </ul>
         <div class="col-md-6">

@@ -6,10 +6,12 @@
 
 <struts-config>
 	<form-beans>
+		<form-bean name="LoginValidationForm" type="actionForm.global.LoginValidationForm"/>		
 		<form-bean name="AddContactValidationForm" type="actionForm.contact.AddContactValidationForm"/>
 		<form-bean name="UpdateContactValidationForm" type="actionForm.contact.UpdateContactValidationForm"/>
 		<form-bean name="SearchContactValidationForm" type="actionForm.contact.SearchContactValidationForm"/>			
-		<form-bean name="LoginValidationForm" type="actionForm.LoginValidationForm"/>
+		<form-bean name="AddGroupeValidationForm" type="actionForm.groupe.AddGroupeValidationForm"/>
+		<form-bean name="AddContactGroupeValidationForm" type="actionForm.groupe.AddContactGroupeValidationForm"/>			
 	</form-beans>
 	
 	<action-mappings>
@@ -25,6 +27,9 @@
 			<forward name = "success" path="/pages/main.jsp"/>
 		</action>	
 	
+		<action path="/index" forward="/pages/main.jsp"/>
+				
+		<!-- Contact actions *************************** -->			
 		<action path="/createContact" forward="/pages/createContact.jsp"/>
 		
 		<action path="/updateContact" forward="/pages/updateContact.jsp"/>
@@ -32,34 +37,52 @@
 		<action path="/deleteContact" forward="/pages/main.jsp"/>
 		
 		<action path="/searchContact" forward="/pages/main.jsp"/>
-				
-		<action path="/index" forward="/pages/main.jsp"/>
+		
+		<!-- *************************** Groupe actions *************************** -->			
+		<action path="/groupe/createGroupe" forward="/pages/groupe/createGroupe.jsp"/>
+		
+		<action path="/groupe/addContactGroupe" forward="/pages/groupe/addContactGroupe.jsp"/>					
+		
 	
 		<action path="/AddContact" 
-					type="servletAction.AddContactAction"
+					type="servletAction.contact.AddContactAction"
 					name="AddContactValidationForm" scope="request"
 					input="/pages/createContact.jsp">
 				<forward name="success" path="/pages/main.jsp" />
 				<forward name="error" path="/pages/error.jsp" />
 		</action>
 		
-		<action path = "/UpdateContact" type = "servletAction.UpdateContactAction"
+		<action path = "/UpdateContact" type = "servletAction.contact.UpdateContactAction"
 					name = "UpdateContactValidationForm" scope ="request"
 					input = "/pages/updateContact.jsp">
 				<forward name = "success" path = "/pages/main.jsp"/>
-				<forward name = "error" path = "/pages/error.jsp"/>		
+				<forward name = "error" path = "/pages/error.jsp"/>
 		</action>
 		
-		<action path = "/DeleteContact" type ="servletAction.DeleteContactAction">
+		<action path = "/DeleteContact" type ="servletAction.contact.DeleteContactAction">
 			<forward name = "success" path="/pages/main.jsp"/>
 		</action>	
 
-		<action path = "/SearchContact" type ="servletAction.SearchContactAction"
+		<action path = "/SearchContact" type ="servletAction.contact.SearchContactAction"
 				name = "SearchContactValidationForm" scope = "request"
 				input = "/pages/main.jsp">
 			<forward name = "success" path="/pages/main.jsp"/>
 		</action>
 			
+		<action path = "/AddGroupe" type = "servletAction.groupe.AddGroupeAction"
+				name = "AddGroupeValidationForm" scope = "request"
+				input = "/pages/groupes/createGroupe.jsp">
+			<forward name = "success" path = "/pages/main.jsp"/>
+			<forward name = "error" path = "/pages/error.jsp"/>
+		</action>
+		
+		<action path = "/AddContactGroupe" type = "servletAction.groupe.AddContactGroupeAction"
+				name = "AddContactGroupeValidationForm" scope = "request"
+				input = "/pages/groupe/addContactGroupe.jsp">
+			<forward name = "success" path = "/pages/main.jsp"/>
+			<forward name = "error" path = "/pages/error.jsp"/>
+		</action>		
+							
 		</action-mappings>
 
 <!-- ========== Ressources de definitions de messages =========================== -->

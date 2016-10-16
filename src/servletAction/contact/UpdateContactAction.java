@@ -1,4 +1,4 @@
-package servletAction;
+package servletAction.contact;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionMapping;
 
 import actionForm.contact.UpdateContactValidationForm;
 import domain.DAOContact;
+import servletAction.AccueilAction;
 
 public class UpdateContactAction extends Action {
 
@@ -25,10 +26,11 @@ public class UpdateContactAction extends Action {
 		final String email = uForm.getEmail();
 		
 		final DAOContact daoc = new DAOContact();
-		final String uError = daoc.update(id, lastName, firstName, email);
+		final String error = daoc.update(id, lastName, firstName, email);
 		
-		request.setAttribute("lesContacts", daoc.getAllContacts());
-		return uError == null ? mapping.findForward("success") : mapping.findForward("error");
+		final AccueilAction accueil = new AccueilAction();
+		
+		return error == null ? accueil.execute(mapping, form, request, response) : mapping.findForward("error");
 	}
 	
 }

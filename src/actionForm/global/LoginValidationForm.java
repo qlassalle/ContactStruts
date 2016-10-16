@@ -1,4 +1,4 @@
-package actionForm;
+package actionForm.global;
 
 import javax.servlet.http.HttpServletRequest;
 

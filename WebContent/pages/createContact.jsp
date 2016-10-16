@@ -26,12 +26,12 @@
 	
 	                    <label class="col-md-4 control-label">Nom</label>
 	                    <div class="col-md-8">
-	                        <html:text styleClass="form-control inputForm" property = "firstName"/>
+	                        <html:text styleClass="form-control inputForm" property = "lastName"/>
 	                    </div>
 	
 	                    <label class="col-md-4 control-label">Prénom</label>
 	                    <div class="col-md-8">
-	                        <html:text styleClass="form-control inputForm" property ="lastName"/>
+	                        <html:text styleClass="form-control inputForm" property ="firstName"/>
 	                    </div>
 	
 	
