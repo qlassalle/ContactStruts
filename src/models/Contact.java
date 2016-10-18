@@ -17,6 +17,21 @@ public class Contact {
 		this.lastName = lastName;
 		this.email = email;
 	}
+	
+	
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		Contact c = (Contact)obj;
+		if(c.getId() == this.getId()) {
+			return true;
+		}
+		
+		return false;
+	}
+
+
 
 	public void setId(long value) {
 		this.id = value;

@@ -32,16 +32,14 @@
 		<!-- Contact actions *************************** -->			
 		<action path="/createContact" forward="/pages/createContact.jsp"/>
 		
-		<action path="/updateContact" forward="/pages/updateContact.jsp"/>
-	
-		<action path="/deleteContact" forward="/pages/main.jsp"/>
+		<action path="/updateContact" forward="/pages/updateContact.jsp"/>	
 		
 		<action path="/searchContact" forward="/pages/main.jsp"/>
 		
 		<!-- *************************** Groupe actions *************************** -->			
 		<action path="/groupe/createGroupe" forward="/pages/groupe/createGroupe.jsp"/>
 		
-		<action path="/groupe/addContactGroupe" forward="/pages/groupe/addContactGroupe.jsp"/>					
+		<!-- <action path="/groupe/getGroupeInfo" forward="/pages/groupe/addContactGroupe.jsp"/> -->					
 		
 	
 		<action path="/AddContact" 
@@ -81,8 +79,12 @@
 				input = "/pages/groupe/addContactGroupe.jsp">
 			<forward name = "success" path = "/pages/main.jsp"/>
 			<forward name = "error" path = "/pages/error.jsp"/>
-		</action>		
-							
+		</action>
+		
+		<action path = "/GetGroupeInfo" type ="servletAction.groupe.GetGroupeInfoAction">
+			<forward name = "success" path="/pages/groupe/addContactGroupe.jsp"/>
+		</action>
+									
 		</action-mappings>
 
 <!-- ========== Ressources de definitions de messages =========================== -->
