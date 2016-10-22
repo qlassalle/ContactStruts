@@ -25,7 +25,7 @@ public class AccueilAction extends Action{
 		final DAOGroupe daog = new DAOGroupe();
 		List<Integer> nbMembre = new ArrayList<Integer>();
 		
-		ArrayList<Groupe> lesGroupes = (ArrayList)daog.getAllGroupes();
+		ArrayList<Groupe> lesGroupes = (ArrayList<Groupe>)daog.getAllGroupes();
 		request.setAttribute("lesGroupes", lesGroupes);
 		for(Groupe groupe : lesGroupes) {
 			nbMembre.add(daog.getNbMembre(groupe.getId()));
@@ -33,7 +33,5 @@ public class AccueilAction extends Action{
 		request.setAttribute("nbMembre", nbMembre);
 		request.setAttribute("lesContacts", daoc.getAllContacts());
 		return mapping.findForward("success");
-	}
-
-	
+	}	
 }

@@ -3,8 +3,16 @@ package models;
 
 public class Address {
 
-	private String street, city, zip, country;
 	private int id;
+	private String street, city, zip, country;
+	
+	public Address(int id, String street, String city, String zip, String country) {
+		this.id = id;
+		this.street = street;
+		this.city = city;
+		this.zip = zip;
+		this.country = country;
+	}
 
 	public void setId(int value) {
 		this.id = value;

@@ -12,6 +12,13 @@ public class GlobalConnection {
 	private final String motDePasse = "root";
 	private final String motDePasseWindows = "";
 	
+
+	Connection connection;
+	
+	public GlobalConnection() {
+		connection = getConnection();
+	}
+
 	protected Connection getConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

@@ -1,5 +1,6 @@
 <%@page import="domain.DAOContact"%>
 <%@page import="models.Contact"%>
+<%@page import="models.Address"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
@@ -18,9 +19,9 @@
 	
 <%
 	DAOContact daoc = new DAOContact();
-	int id = Integer.valueOf(request.getParameter("id")); 
-	Contact c = daoc.getContactById(id);
-	String sid = String.valueOf(id);
+	int contactId = Integer.valueOf(request.getParameter("id")); 
+	Contact c = daoc.getContactById(contactId);
+	session.setAttribute("contactId", contactId);
 %>	
 		<div class="row">
 			<div class="col-md-offset-2 col-md-6">
@@ -28,10 +29,6 @@
 					<fieldset>
 						<h1 class="formName col-md-offset-4"><bean:message key = "maj.contact"/></h1>
 						<div class="form-group">
-							<label class="col-md-4 control-label">Id</label>
-							<div class="col-md-8">
-								<html:text styleClass="form-control inputForm" property="id" value ='<%= sid %>' readonly="readonly"/>
-							</div>
 							<label class="col-md-4 control-label">Nom</label>
 							<div class="col-md-8">
 								<html:text styleClass="form-control inputForm" property = "lastName" value = '<%= c.getLastName() %>'/>
@@ -52,6 +49,64 @@
 					</fieldset>
 				</html:form>
 			</div>
-		</div>		
+		</div>
+		<%
+	Address address;
+	try
+	{
+		address = daoc.getContactAddress(contactId);
+	}
+	catch (NullPointerException npe)
+	{
+		address = null;
+	}
+%>		
+		
+		<div class="row">
+			<div class="col-md-offset-2 col-md-6 contactAdresse">
+				<h1 class="formName col-md-offset-4"><bean:message key = "adresse.contact"/></h1>
+				<%
+					if(address != null) {
+				%>
+					<table class = "table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Pays</th>
+								<th>Code postal</th>
+								<th>Ville</th>
+								<th>Rue</th>
+							</tr>
+						</thead>
+								<tr>					
+									<td><%= address.getCountry() %></td>
+									<td><%= address.getZip() %></td>
+									<td><%= address.getCity() %></td>
+									<td><%= address.getStreet() %></td>
+									<td><html:link action ="updateAddress.jsp">
+											<html:param name="id"><%= address.getId() %></html:param>
+											<span class = "glyphicon glyphicon-pencil"></span>
+										</html:link>
+									</td>
+									<td>
+									<html:link action ="/DeleteAddress">
+											<html:param name = "id"><%= address.getId()%></html:param>
+											<span class="glyphicon glyphicon-remove"></span>
+										</html:link>
+									</td>
+								</tr>
+					</table>					
+				<%
+				} else {
+					%>
+					<div class="col-md-offset-4">
+						<html:link action="address/createAddress.jsp">
+						<p class ="ajoutAttribut"><bean:message key = "creation.adresse.contact"/></p>
+						</html:link>
+					</div>
+				<%
+				}
+				%>
+			</div>
+		</div>
 	</body>
 </html:html>

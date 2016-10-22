@@ -1,6 +1,5 @@
 package domain;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,25 +7,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import models.Address;
 import models.Contact;
 
 public class DAOContact extends GlobalConnection{
 
-	Connection connection;
-	GlobalConnection globalConnection;
-
 	public DAOContact() {
-		globalConnection = new GlobalConnection();
-		connection = globalConnection.getConnection();
+		super();
 	}
 
 	public String save(String nom, String prenom, String email) {
-		connection = globalConnection.checkConnection(connection);
+		connection = checkConnection(connection);
 		Statement stmt;
 		try {
 			stmt = connection.createStatement();
-			System.out.println("insert into contact(nom, prenom, email) values(\"" + nom + "\",\""
-					+ prenom + "\",\"" + email + "\");");
 			stmt.executeUpdate("insert into contact(nom, prenom, email) values(\"" + nom + "\",\""
 					+ prenom + "\",\"" + email + "\");");
 			stmt.close();
@@ -41,7 +35,7 @@ public class DAOContact extends GlobalConnection{
 	}
 
 	public String update(int id, String nom, String prenom, String email) {
-		connection = globalConnection.checkConnection(connection);
+		connection = checkConnection(connection);
 		int result = 0;
 		String req = "update contact set id = ?, nom = ?, prenom = ?, email = ? where id = ?";
 		System.out.println("id:" + id);
@@ -65,7 +59,7 @@ public class DAOContact extends GlobalConnection{
 	}
 
 	public String delete(String id) {
-		connection = globalConnection.checkConnection(connection);
+		connection = checkConnection(connection);
 		String req = "delete from contact where id = ?";
 		try {
 			try (PreparedStatement stmt = connection.prepareStatement(req)) {
@@ -87,7 +81,7 @@ public class DAOContact extends GlobalConnection{
 	}
 
 	public List<Contact> getAllContacts() {
-		connection = globalConnection.checkConnection(connection);
+		connection = checkConnection(connection);
 		List<Contact> lesContacts = new ArrayList<Contact>();
 		ResultSet result = null;
 		try {
@@ -112,7 +106,7 @@ public class DAOContact extends GlobalConnection{
 	}
 
 	public List<Contact> getContact(String firstName) {
-		connection = globalConnection.checkConnection(connection);
+		connection = checkConnection(connection);
 		List<Contact> lesContacts = new ArrayList<Contact>();
 		Contact c = null;
 		try {
@@ -136,7 +130,7 @@ public class DAOContact extends GlobalConnection{
 	}
 	
 	public Contact getContactById(int id) {
-		connection = globalConnection.checkConnection(connection);
+		connection = checkConnection(connection);
 		Contact c = null;
 		try {
 			String req = "select * from contact where id like ?";
@@ -155,5 +149,49 @@ public class DAOContact extends GlobalConnection{
 			closeConnection(connection);
 		}
 		return c;
+	}
+	
+	
+	public Address getContactAddress(int id)
+	{
+		Address address = null;
+		connection = checkConnection(connection);
+		try {
+			String req = "select idAddress from contact where id = ?";
+			ResultSet result;
+			try (PreparedStatement stmt = connection.prepareStatement(req)) {
+				stmt.setInt(1, id);
+				result = stmt.executeQuery();
+				while(result.next()){
+					DAOAddress daoa = new DAOAddress();
+					address = daoa.getAddress(result.getInt(1));
+				}
+			}
+		}
+		catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		finally {
+			closeConnection(connection);
+		}
+		return address;
+	}
+
+	public void addAddress(int id, int idAddress) {
+		connection = checkConnection(connection);
+		try {
+			String req = "update contact set idAddress = ? where id = ?;";
+			try(PreparedStatement stmt = connection.prepareStatement(req)) {
+				stmt.setInt(1, idAddress);
+				stmt.setInt(2, id);
+				stmt.executeUpdate();
+				stmt.close();
+			}
+		} catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		finally {
+			closeConnection(connection);
+		}
 	}
 }

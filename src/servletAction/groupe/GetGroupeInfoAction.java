@@ -26,14 +26,14 @@ public class GetGroupeInfoAction extends Action{
 		
 		DAOContact daoc = new DAOContact();
 		DAOGroupe daog = new DAOGroupe();
-		ArrayList<Contact> lesContacts = (ArrayList)daoc.getAllContacts();
-		ArrayList<Contact> lesMembres = (ArrayList)daog.getMembres(Integer.valueOf(idGroupe));
+		ArrayList<Contact> lesContacts = (ArrayList<Contact>)daoc.getAllContacts();
+		ArrayList<Contact> lesMembres = (ArrayList<Contact>)daog.getMembres(Integer.valueOf(idGroupe));
 		String []membres = new String[daog.getNbMembre(idGroupe)];
 		
 		request.setAttribute("lesContacts", lesContacts);
 		request.setAttribute("lesMembres", lesMembres);
 		
-		// set the members of the groupe to have them checked in the next page
+		// set the members of the group to have them checked in the next page
 		// the trick is done in AddContactGroupeValidationForm in the reset method
 		int i = 0;
 		for(Contact c : lesContacts) {

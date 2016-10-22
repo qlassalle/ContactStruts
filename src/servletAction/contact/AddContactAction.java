@@ -13,13 +13,14 @@ import org.apache.struts.action.ActionMessages;
 
 import actionForm.contact.AddContactValidationForm;
 import domain.DAOContact;
+import servletAction.AccueilAction;
 
 public class AddContactAction extends Action {
 
-	
+	@Override
 	public ActionForward execute(final ActionMapping pMapping,
 			ActionForm pForm, final HttpServletRequest pRequest,
-			final HttpServletResponse pResponse) 
+			final HttpServletResponse pResponse) throws Exception 
 	{
 		
 		final AddContactValidationForm lForm=(AddContactValidationForm)pForm;
@@ -32,7 +33,8 @@ public class AddContactAction extends Action {
 		final DAOContact daoc = new DAOContact();
 		final String error = daoc.save(firstName, lastName, email);
 		
-		pRequest.setAttribute("lesContacts", daoc.getAllContacts());
-		return error == null ? pMapping.findForward("success") : pMapping.findForward("error");
+		final AccueilAction accueil = new AccueilAction();
+		
+		return error == null ? accueil.execute(pMapping, pForm, pRequest, pResponse) : pMapping.findForward("error");
 	}
 }

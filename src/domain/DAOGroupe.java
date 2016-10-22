@@ -1,6 +1,5 @@
 package domain;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,23 +7,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import models.Contact;
 import models.Groupe;
 
 public class DAOGroupe extends GlobalConnection {
-
-	Connection connection;
-	GlobalConnection globalConnection;
 	
 	public DAOGroupe() {
-		globalConnection = new GlobalConnection();
-		connection = globalConnection.getConnection();
+		super();
 	}
 	
 	public String save(String name) {
-		connection = globalConnection.checkConnection(connection);
+		connection = checkConnection(connection);
 		Statement stmt;
 		try {
 			stmt = connection.createStatement();
@@ -39,7 +32,7 @@ public class DAOGroupe extends GlobalConnection {
 	}
 
 	public List<Groupe> getAllGroupes() {
-		connection = globalConnection.checkConnection(connection);
+		connection = checkConnection(connection);
 		List<Groupe> lesGroupes = new ArrayList<Groupe>();
 		ResultSet result = null;
 		try {
@@ -63,7 +56,7 @@ public class DAOGroupe extends GlobalConnection {
 	}
 
 	public Integer getNbMembre(int id) {
-		connection = globalConnection.checkConnection(connection);
+		connection = checkConnection(connection);
 		try {
 			String req = "select count(id) from contact_groupe where idGroupe = ?";
 			ResultSet result = null;
@@ -82,7 +75,7 @@ public class DAOGroupe extends GlobalConnection {
 
 	public void addContact(int id, String[] ids) {
 		
-		connection = globalConnection.checkConnection(connection);
+		connection = checkConnection(connection);
 		Statement stmt;
 		String req;
 		try {
@@ -104,7 +97,7 @@ public class DAOGroupe extends GlobalConnection {
 	{
 		List<Contact> lesContacts = new ArrayList<Contact>();
 		DAOContact daoc = new DAOContact();
-		connection = globalConnection.checkConnection(connection);
+		connection = checkConnection(connection);
 		ResultSet result = null;
 		try {
 			try(Statement stmt = connection.createStatement()) {

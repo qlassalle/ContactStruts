@@ -11,7 +11,8 @@
 		<form-bean name="UpdateContactValidationForm" type="actionForm.contact.UpdateContactValidationForm"/>
 		<form-bean name="SearchContactValidationForm" type="actionForm.contact.SearchContactValidationForm"/>			
 		<form-bean name="AddGroupeValidationForm" type="actionForm.groupe.AddGroupeValidationForm"/>
-		<form-bean name="AddContactGroupeValidationForm" type="actionForm.groupe.AddContactGroupeValidationForm"/>			
+		<form-bean name="AddContactGroupeValidationForm" type="actionForm.groupe.AddContactGroupeValidationForm"/>
+		<form-bean name="AddAddressValidationForm" type="actionForm.address.AddAddressValidationForm"/>	
 	</form-beans>
 	
 	<action-mappings>
@@ -41,7 +42,12 @@
 		
 		<!-- <action path="/groupe/getGroupeInfo" forward="/pages/groupe/addContactGroupe.jsp"/> -->					
 		
-	
+			
+		<!-- *************************** Address actions ************************** -->
+		
+		<action path="/address/createAddress" forward="/pages/address/createAddress.jsp"/>
+						
+					
 		<action path="/AddContact" 
 					type="servletAction.contact.AddContactAction"
 					name="AddContactValidationForm" scope="request"
@@ -84,7 +90,16 @@
 		<action path = "/GetGroupeInfo" type ="servletAction.groupe.GetGroupeInfoAction">
 			<forward name = "success" path="/pages/groupe/addContactGroupe.jsp"/>
 		</action>
-									
+		
+		<!-- ****************** Address ****************** -->
+
+		<action path = "/AddAddress" type = "servletAction.address.AddAddressAction"
+				name = "AddAddressValidationForm" scope = "request"
+				input = "/pages/address/createAddress.jsp">
+			<forward name = "success" path = "/pages/main.jsp"/>
+			<forward name = "error" path = "/pages/error.jsp"/>
+		</action>
+											
 		</action-mappings>
 
 <!-- ========== Ressources de definitions de messages =========================== -->
