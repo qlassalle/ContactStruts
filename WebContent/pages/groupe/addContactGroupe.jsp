@@ -33,7 +33,7 @@
 						<%
 							for(Contact c : lesContacts)
 							{
-								String id = String.valueOf(c.getId());
+								String id = String.valueOf(c.getIdContact());
 						%> 
 								<html:multibox property ="ids" value ="<%= id %>"/><%= c.getFirstName() + " " + c.getLastName() %>
 								<br>

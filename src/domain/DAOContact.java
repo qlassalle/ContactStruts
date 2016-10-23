@@ -58,12 +58,12 @@ public class DAOContact extends GlobalConnection{
 		}
 	}
 
-	public String delete(String id) {
+	public String delete(int id) {
 		connection = checkConnection(connection);
 		String req = "delete from contact where id = ?";
 		try {
 			try (PreparedStatement stmt = connection.prepareStatement(req)) {
-				stmt.setString(1, id);
+				stmt.setInt(1, id);
 				stmt.executeUpdate();
 				stmt.close();
 			}
@@ -177,7 +177,7 @@ public class DAOContact extends GlobalConnection{
 		return address;
 	}
 
-	public void addAddress(int id, int idAddress) {
+	public String addAddress(int id, int idAddress) {
 		connection = checkConnection(connection);
 		try {
 			String req = "update contact set idAddress = ? where id = ?;";
@@ -186,9 +186,10 @@ public class DAOContact extends GlobalConnection{
 				stmt.setInt(2, id);
 				stmt.executeUpdate();
 				stmt.close();
+				return null;
 			}
 		} catch(SQLException sqle) {
-			sqle.printStackTrace();
+			return sqle.getMessage();
 		}
 		finally {
 			closeConnection(connection);

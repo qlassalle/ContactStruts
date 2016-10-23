@@ -2,24 +2,22 @@ package models;
 
 public class PhoneNumber {
 
-	private Contact contact;
-	private int id;
+	private int idContact, id;
 	private String kind, number;
 	
-	public PhoneNumber(Contact contact, int id, String kind, String number) {
-		super();
-		this.contact = contact;
+	public PhoneNumber(int id, String kind, String number, int idContact) {
 		this.id = id;
 		this.kind = kind;
 		this.number = number;
+		this.idContact = idContact;
 	}
 
-	public void setContact(Contact value) {
-		this.contact = value;
+	public void setIdContact(int value) {
+		this.idContact = value;
 	}
 
-	public Contact getContact() {
-		return this.contact;
+	public int getIdContact() {
+		return this.idContact;
 	}
 
 	public void setId(int value) {

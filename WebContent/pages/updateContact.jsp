@@ -1,6 +1,11 @@
+<%@page import="domain.DAOPhoneNumber"%>
 <%@page import="domain.DAOContact"%>
 <%@page import="models.Contact"%>
 <%@page import="models.Address"%>
+<%@page import="models.PhoneNumber"%>
+<%@page import="models.Groupe"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
@@ -19,9 +24,19 @@
 	
 <%
 	DAOContact daoc = new DAOContact();
-	int contactId = Integer.valueOf(request.getParameter("id")); 
+	int contactId;
+	if(request.getParameter("idContact") != null) {
+		contactId = Integer.valueOf(request.getParameter("idContact")); 
+		session.setAttribute("contactId", contactId);	
+	}
+	else {
+		try {
+			contactId = ((Long)session.getAttribute("contactId")).intValue();
+		} catch (ClassCastException cce) {
+			contactId = (int)session.getAttribute("contactId");
+		}
+	}
 	Contact c = daoc.getContactById(contactId);
-	session.setAttribute("contactId", contactId);
 %>	
 		<div class="row">
 			<div class="col-md-offset-2 col-md-6">
@@ -50,7 +65,7 @@
 				</html:form>
 			</div>
 		</div>
-		<%
+<%
 	Address address;
 	try
 	{
@@ -68,13 +83,13 @@
 				<%
 					if(address != null) {
 				%>
-					<table class = "table table-striped table-bordered">
+					<table class = "table table-striped table-bordered col-md-offset-2">
 						<thead>
 							<tr>
-								<th>Pays</th>
-								<th>Code postal</th>
-								<th>Ville</th>
-								<th>Rue</th>
+								<th><bean:message key = "adresse.pays"/></th>
+								<th><bean:message key = "adresse.zip"/></th>
+								<th><bean:message key = "adresse.ville"/></th>
+								<th><bean:message key = "adresse.rue"/></th>
 							</tr>
 						</thead>
 								<tr>					
@@ -82,7 +97,7 @@
 									<td><%= address.getZip() %></td>
 									<td><%= address.getCity() %></td>
 									<td><%= address.getStreet() %></td>
-									<td><html:link action ="updateAddress.jsp">
+									<td><html:link action ="address/updateAddress.jsp">
 											<html:param name="id"><%= address.getId() %></html:param>
 											<span class = "glyphicon glyphicon-pencil"></span>
 										</html:link>
@@ -108,5 +123,61 @@
 				%>
 			</div>
 		</div>
-	</body>
+		
+<% 
+	List<PhoneNumber> numbers;
+	DAOPhoneNumber daop = new DAOPhoneNumber();
+	try {
+		numbers = (ArrayList<PhoneNumber>)daop.getPhoneNumbers(contactId); 
+	} catch (NullPointerException npe) {
+		numbers = null;
+	}
+%>
+
+	<div class="row">
+		<div class="col-md-offset-2 col-md-6 contactNumbers">
+			<h1 class="formName col-md-offset-4">
+				<bean:message key="phoneNumber.contact" />
+			</h1>
+			<table class="table table-striped table-bordered col-md-offset-2">
+				<thead>
+					<tr>
+						<th><bean:message key="phoneNumber.kind" /></th>
+						<th><bean:message key="phoneNumber.number" /></th>
+					</tr>
+				</thead>
+				
+				<%
+					if(numbers != null) {
+						for(PhoneNumber number : numbers) {
+				%>
+				<tr>
+					<td><%= number.getKind() %></td>
+					<td><%= number.getNumber() %></td>
+					<td><html:link action="phoneNumber/updateNumber.jsp">
+							<html:param name="id"><%= number.getId() %></html:param>
+							<span class="glyphicon glyphicon-pencil"></span>
+						</html:link></td>
+					<td><html:link action="/DeleteNumber">
+							<html:param name="id"><%= number.getId()%></html:param>
+							<span class="glyphicon glyphicon-remove"></span>
+						</html:link></td>
+				</tr>
+				
+			<%
+						}
+				}
+			%>
+			</table>
+			<div class="col-md-offset-4">
+				<html:link action="phoneNumber/createPhoneNumber.jsp">
+					<p class="ajoutAttribut">
+						<bean:message key="creation.phoneNumber" />
+					</p>
+				</html:link>
+			</div>
+		</div>
+	</div>
+
+</body>
 </html:html>

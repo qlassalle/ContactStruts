@@ -25,7 +25,7 @@
 			</tr>
 		</thead>
  			<%
-				ArrayList<Contact> lesContacts = (ArrayList)request.getAttribute("lesContacts");
+				ArrayList<Contact> lesContacts = (ArrayList<Contact>)request.getAttribute("lesContacts");
 				for(Contact contact : lesContacts)
 				{
 			%>
@@ -34,13 +34,13 @@
 						<td><%= contact.getLastName() %></td>
 						<td><%= contact.getEmail() %></td>
 						<td><html:link action ="updateContact.jsp">
-								<html:param name="id"><%= contact.getId() %></html:param>
+								<html:param name="idContact"><%= contact.getIdContact() %></html:param>
 								<span class = "glyphicon glyphicon-pencil"></span>
 							</html:link>
 						</td>
 						<td>
 							<html:link action ="/DeleteContact">
-								<html:param name = "id"><%= contact.getId()%></html:param>
+								<html:param name = "idContact"><%= contact.getIdContact()%></html:param>
 								<span class="glyphicon glyphicon-remove"></span>
 							</html:link>
 						</td>

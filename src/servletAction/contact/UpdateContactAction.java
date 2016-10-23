@@ -20,7 +20,7 @@ public class UpdateContactAction extends Action {
 		
 		final UpdateContactValidationForm uForm = (UpdateContactValidationForm)form;
 		
-		final int id = uForm.getId();
+		final int id = uForm.getIdContact();
 		final String firstName = uForm.getFirstName();
 		final String lastName = uForm.getLastName();
 		final String email = uForm.getEmail();
@@ -29,7 +29,7 @@ public class UpdateContactAction extends Action {
 		final String error = daoc.update(id, lastName, firstName, email);
 		
 		final AccueilAction accueil = new AccueilAction();
-		
+
 		return error == null ? accueil.execute(mapping, form, request, response) : mapping.findForward("error");
 	}
 	

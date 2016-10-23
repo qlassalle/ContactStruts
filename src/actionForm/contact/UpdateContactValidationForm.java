@@ -17,7 +17,7 @@ public class UpdateContactValidationForm extends ContactValidationForm {
 		      ActionMapping mapping, HttpServletRequest request ) {
 		      ActionErrors errors = new ActionErrors();
 		      
-		      if(getId() <= 0){
+		      if(getIdContact() <= 0){
 		    	errors.add("id", new ActionMessage("creation.id.error.required"));  
 		      }
 		      if( getFirstName()== null || getFirstName().length() < 1 ) {

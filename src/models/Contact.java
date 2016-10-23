@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Contact {
 	
-	private long id;
+	private long idContact;
 	private String firstName, lastName, email;
 	private List<PhoneNumber> phones;
 	private List<Groupe> books;
@@ -12,33 +12,29 @@ public class Contact {
 	
 	public Contact(long id, String firstName, String lastName, String email) {
 		super();
-		this.id = id;
+		this.idContact = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 	}
 	
-	
-
 	@Override
 	public boolean equals(Object obj) {
 		
 		Contact c = (Contact)obj;
-		if(c.getId() == this.getId()) {
+		if(c.getIdContact() == this.getIdContact()) {
 			return true;
 		}
 		
 		return false;
 	}
 
-
-
-	public void setId(long value) {
-		this.id = value;
+	public void setIdContact(long value) {
+		this.idContact = value;
 	}
 
-	public long getId() {
-		return this.id;
+	public long getIdContact() {
+		return this.idContact;
 	}
 	
 	public void setFirstName(String value) {

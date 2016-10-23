@@ -8,7 +8,7 @@
 	<html:html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Ajouter une adresse</title>
+		<title><bean:message key="add.address"/></title>
 	</head>
 	
 	<body>
@@ -21,23 +21,23 @@
 	                <h1 class="formName col-md-offset-4"><bean:message key="add.address"/></h1>
 	                <div class="form-group">
 	
-	                    <label class="col-md-4 control-label">Rue</label>
+	                    <label class="col-md-4 control-label"><bean:message key="address.rue"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property = "street"/>
 	                    </div>
 	
-	                    <label class="col-md-4 control-label">Ville</label>
+	                    <label class="col-md-4 control-label"><bean:message key="address.ville"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property ="city"/>
 	                    </div>
 	
 	
-	                    <label class="col-md-4 control-label">Code postal</label>
+	                    <label class="col-md-4 control-label"><bean:message key="address.zip"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property="zip"/>
 	                    </div>
 	                    
-	                    <label class="col-md-4 control-label">Pays</label>
+	                    <label class="col-md-4 control-label"><bean:message key="address.country"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property="country"/>
 	                    </div>	

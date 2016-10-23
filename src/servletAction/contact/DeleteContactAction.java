@@ -18,11 +18,10 @@ public class DeleteContactAction extends Action {
 			final HttpServletResponse pResponse) throws Exception {
 		
 		String id = request.getQueryString();
-		id = id.substring(3, id.length());
-		System.out.println(id);
+		int idContact = Integer.valueOf(id.substring(3, id.length()));
 
 		final DAOContact daoc = new DAOContact();
-		final String error = daoc.delete(id);
+		final String error = daoc.delete(idContact);
 		
 		final AccueilAction accueil = new AccueilAction();
 		

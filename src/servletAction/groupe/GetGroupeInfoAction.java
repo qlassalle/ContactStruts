@@ -38,7 +38,7 @@ public class GetGroupeInfoAction extends Action{
 		int i = 0;
 		for(Contact c : lesContacts) {
 			if(lesMembres.contains(c)) {
-				membres[i] = String.valueOf(c.getId());
+				membres[i] = String.valueOf(c.getIdContact());
 				i++;
 			}
 		}

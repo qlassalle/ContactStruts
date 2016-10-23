@@ -74,7 +74,7 @@ public class DAOGroupe extends GlobalConnection {
 	}
 
 	public void addContact(int id, String[] ids) {
-		
+		deleteAllContacts(id);
 		connection = checkConnection(connection);
 		Statement stmt;
 		String req;
@@ -118,5 +118,37 @@ public class DAOGroupe extends GlobalConnection {
 			closeConnection(connection);
 		}
 		return lesContacts;
+	}
+
+	public String delete(int idGroupe) {
+		connection = checkConnection(connection);
+		String req = "delete from groupe where id = ? ";
+		try {
+			try(PreparedStatement stmt = connection.prepareStatement(req)) {
+				stmt.setInt(1, idGroupe);
+				stmt.executeUpdate();
+				stmt.close();
+				return null;
+			}
+		} catch(SQLException sqle) {
+			return sqle.getMessage();
+		} finally {
+			closeConnection(connection);
+		}
+	}
+	
+	private void deleteAllContacts(int idGroupe) {
+		connection = checkConnection(connection);
+		String req = "delete from contact_groupe where idGroupe = ?";
+		try {
+			try(PreparedStatement stmt = connection.prepareStatement(req)) {
+				stmt.setInt(1, idGroupe);
+				stmt.executeUpdate();
+			}
+		} catch(SQLException sqle) {
+			sqle.printStackTrace();
+		} finally {
+			closeConnection(connection);
+		}
 	}
 }

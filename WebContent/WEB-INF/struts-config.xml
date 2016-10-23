@@ -12,7 +12,8 @@
 		<form-bean name="SearchContactValidationForm" type="actionForm.contact.SearchContactValidationForm"/>			
 		<form-bean name="AddGroupeValidationForm" type="actionForm.groupe.AddGroupeValidationForm"/>
 		<form-bean name="AddContactGroupeValidationForm" type="actionForm.groupe.AddContactGroupeValidationForm"/>
-		<form-bean name="AddAddressValidationForm" type="actionForm.address.AddAddressValidationForm"/>	
+		<form-bean name="AddAddressValidationForm" type="actionForm.address.AddAddressValidationForm"/>
+		<form-bean name="AddPhoneNumberValidationForm" type="actionForm.phoneNumber.AddPhoneNumberValidationForm"/>			
 	</form-beans>
 	
 	<action-mappings>
@@ -30,24 +31,30 @@
 	
 		<action path="/index" forward="/pages/main.jsp"/>
 				
-		<!-- Contact actions *************************** -->			
+		<!-- *************************** Contact links *************************** -->			
 		<action path="/createContact" forward="/pages/createContact.jsp"/>
 		
 		<action path="/updateContact" forward="/pages/updateContact.jsp"/>	
 		
 		<action path="/searchContact" forward="/pages/main.jsp"/>
 		
-		<!-- *************************** Groupe actions *************************** -->			
+		<!-- *************************** Groupe links *************************** -->			
 		<action path="/groupe/createGroupe" forward="/pages/groupe/createGroupe.jsp"/>
 		
 		<!-- <action path="/groupe/getGroupeInfo" forward="/pages/groupe/addContactGroupe.jsp"/> -->					
 		
 			
-		<!-- *************************** Address actions ************************** -->
+		<!-- *************************** Address links ************************** -->
 		
 		<action path="/address/createAddress" forward="/pages/address/createAddress.jsp"/>
 						
-					
+		<!-- *************************** PhoneNumber links ************************** -->
+		
+		<action path="/phoneNumber/createPhoneNumber" forward="/pages/phoneNumber/createPhoneNumber.jsp"/>
+		
+			
+		<!-- *************************** Contact Actions ************************** -->
+						
 		<action path="/AddContact" 
 					type="servletAction.contact.AddContactAction"
 					name="AddContactValidationForm" scope="request"
@@ -70,9 +77,12 @@
 		<action path = "/SearchContact" type ="servletAction.contact.SearchContactAction"
 				name = "SearchContactValidationForm" scope = "request"
 				input = "/pages/main.jsp">
-			<forward name = "success" path="/pages/main.jsp"/>
+			<forward name = "success" path="/pages/updateContact.jsp"/>
+			<forward name = "erreur" path="/pages/main.jsp"/>
 		</action>
-			
+		
+		<!-- ****************** GROUPE ***************** -->			
+		
 		<action path = "/AddGroupe" type = "servletAction.groupe.AddGroupeAction"
 				name = "AddGroupeValidationForm" scope = "request"
 				input = "/pages/groupes/createGroupe.jsp">
@@ -91,15 +101,32 @@
 			<forward name = "success" path="/pages/groupe/addContactGroupe.jsp"/>
 		</action>
 		
+		<action path = "/DeleteGroupe" type ="servletAction.groupe.DeleteGroupeAction">
+			<forward name = "success" path="/pages/main.jsp"/>
+		</action>
+				
 		<!-- ****************** Address ****************** -->
 
 		<action path = "/AddAddress" type = "servletAction.address.AddAddressAction"
 				name = "AddAddressValidationForm" scope = "request"
 				input = "/pages/address/createAddress.jsp">
-			<forward name = "success" path = "/pages/main.jsp"/>
+			<forward name = "success" path = "/pages/updateContact.jsp"/>
 			<forward name = "error" path = "/pages/error.jsp"/>
 		</action>
-											
+		
+		<action path = "/DeleteAddress" type ="servletAction.address.DeleteAddressAction">
+			<forward name = "success" path="/pages/updateContact.jsp"/>
+		</action>
+		
+		<!-- ****************** PhoneNumber ****************** -->
+			
+		<action path = "/AddPhoneNumber" type = "servletAction.phoneNumber.AddPhoneNumberAction"
+				name = "AddPhoneNumberValidationForm" scope = "request"
+				input = "/pages/phoneNumber/createPhoneNumber.jsp">
+			<forward name = "success" path = "/pages/updateContact.jsp"/>
+			<forward name = "error" path = "/pages/error.jsp"/>
+		</action>			
+														
 		</action-mappings>
 
 <!-- ========== Ressources de definitions de messages =========================== -->

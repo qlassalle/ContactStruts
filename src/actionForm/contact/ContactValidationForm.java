@@ -12,17 +12,17 @@ public abstract class ContactValidationForm extends ActionForm {
 	*/
 	private static final long serialVersionUID = 1L;
 
-	protected int id = 0;
+	protected int idContact = 0;
 	protected String firstName = null;
 	protected String lastName = null;
 	protected String email = null;
 
-	public int getId() {
-		return id;
+	public int getIdContact() {
+		return idContact;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdContact(int id) {
+		this.idContact = id;
 	}
 
 	/**

@@ -36,10 +36,8 @@ public class AddAddressAction extends Action{
 		
 		// add the address to the contact
 		final DAOContact daoc = new DAOContact();
-		daoc.addAddress(idContact, idAddress);
+		final String erreur = daoc.addAddress(idContact, idAddress);
 		
-		final AccueilAction accueil = new AccueilAction();
-		
-		return accueil.execute(mapping, form, request, response);
+		return erreur == null ? mapping.findForward("success") : mapping.findForward("erreur");
 	}
 }

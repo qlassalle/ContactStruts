@@ -13,8 +13,7 @@ import org.apache.struts.action.ActionMapping;
 
 import actionForm.contact.SearchContactValidationForm;
 import domain.DAOContact;
-import domain.DAOGroupe;
-import models.Groupe;
+import models.Contact;
 
 public class SearchContactAction extends Action{
 
@@ -27,18 +26,11 @@ public class SearchContactAction extends Action{
 		final String firstName = sform.getFirstName();
 		
 		final DAOContact daoc = new DAOContact();
-		final DAOGroupe daog = new DAOGroupe();
-		List<Integer> nbMembre = new ArrayList<Integer>();
+				
+		// TODO manage doublons
+		ArrayList<Contact> c = (ArrayList<Contact>)daoc.getContactByFirstName(firstName);
+		request.getSession().setAttribute("contactId", c.get(0).getIdContact());
 		
-		ArrayList<Groupe> lesGroupes = (ArrayList)daog.getAllGroupes();
-		request.setAttribute("lesGroupes", lesGroupes);
-		for(Groupe groupe : lesGroupes) {
-			nbMembre.add(daog.getNbMembre(groupe.getId()));
-		}
-		request.setAttribute("nbMembre", nbMembre);
-		request.setAttribute("lesContacts", daoc.getContactByFirstName(firstName));
-		return mapping.findForward("success");
-	}
-
-	
+		return !c.isEmpty() ? mapping.findForward("success") : mapping.findForward("erreur");
+	}	
 }

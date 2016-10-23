@@ -37,7 +37,7 @@ public class DAOAddress extends GlobalConnection{
 		return address;
 	}
 
-	// TODO associate new address with contact
+
 	public int save(String street, String city, String zip, String country) {
 		connection = checkConnection(connection);
 		PreparedStatement stmt = null;
@@ -64,6 +64,23 @@ public class DAOAddress extends GlobalConnection{
 			return 0;
 		}
 		finally {
+			closeConnection(connection);
+		}
+	}
+
+	public String delete(int id) {
+		connection = checkConnection(connection);
+		String req = "delete from address where id = ?;";
+		try {
+			try(PreparedStatement stmt = connection.prepareStatement(req)){
+				stmt.setInt(1, id);
+				stmt.executeUpdate();
+				stmt.close();
+				return null;
+			}
+		} catch (SQLException sqle) {
+			return sqle.getMessage();
+		} finally {
 			closeConnection(connection);
 		}
 	}
