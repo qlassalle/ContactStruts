@@ -34,14 +34,9 @@
 						<tr>
 							<td><%= groupe.getName() %></td>
 							<td><span class="badge"><%= nbMembre.get(i) %></span></td>
-							<td><html:link action ="groupe/updateGroupe.jsp">
-									<html:param name="id"><%= id %></html:param>
-									<span class = "glyphicon glyphicon-pencil"></span>
-								</html:link>
-							</td>
 							<td><html:link action ="/GetGroupeInfo">
 									<html:param name ="id"><%= id %></html:param>
-									<span class = "glyphicon glyphicon-plus-sign"></span>
+									<span class = "glyphicon glyphicon-pencil"></span>
 								</html:link>
 							</td>
 							<td>

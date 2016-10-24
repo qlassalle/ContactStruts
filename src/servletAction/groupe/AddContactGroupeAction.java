@@ -18,10 +18,10 @@ public class AddContactGroupeAction extends Action{
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		AddContactGroupeValidationForm acgvf = (AddContactGroupeValidationForm)form;
+		AddContactGroupeValidationForm gform = (AddContactGroupeValidationForm)form;
 
 		DAOGroupe daog = new DAOGroupe();
-		daog.addContact(acgvf.getId(), acgvf.getIds());
+		daog.addContact(gform.getId(), gform.getIds());
 		
 		AccueilAction accueil = new AccueilAction();
 		return accueil.execute(mapping, form, request, response);

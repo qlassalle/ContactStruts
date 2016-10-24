@@ -1,4 +1,4 @@
-package servletAction.address;
+package servletAction.phoneNumber;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,20 +8,22 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import domain.DAOAddress;
+import domain.DAOPhoneNumber;
 
-public class DeleteAddressAction extends Action{
+public class DeletePhoneNumberAction extends Action{
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		
-		DAOAddress daoa = new DAOAddress();
+
+		DAOPhoneNumber daop = new DAOPhoneNumber();
 		String id = request.getQueryString();
-		int idAddress = Integer.valueOf(id.substring(3, id.length()));
-		final String error = daoa.delete(idAddress);
+		int idPhoneNumber = Integer.valueOf(id.substring(14, id.length()));
+		final String error = daop.delete(idPhoneNumber);
 		
 		return error == null ? mapping.findForward("success") : mapping.findForward("erreur");
-	}	
+	}
+
+	
+	
 }

@@ -22,29 +22,36 @@
    <body bgcolor="white">
 	
 	<% 
-		ArrayList<Contact> lesContacts = (ArrayList)request.getAttribute("lesContacts");
-		ArrayList<Contact> lesMembres = (ArrayList)request.getAttribute("lesMembres");
+		ArrayList<Contact> lesContacts = (ArrayList<Contact>)request.getAttribute("lesContacts");
+		ArrayList<Contact> lesMembres = (ArrayList<Contact>)request.getAttribute("lesMembres");
 	%>
 		<div class="row">
-			<div class="col-md-offset-2 col-md-6">
-			<bean:message key ="contact_groupe.ajouter"/>
-				<html:form styleClass="form-horizontal" action="/AddContactGroupe" method="post">
-					<html:errors />
-						<%
-							for(Contact c : lesContacts)
-							{
-								String id = String.valueOf(c.getIdContact());
-						%> 
-								<html:multibox property ="ids" value ="<%= id %>"/><%= c.getFirstName() + " " + c.getLastName() %>
-								<br>
-						<%
-							}
-						%>
-						<html:hidden property = "id" value = '<%= request.getParameter("id") %>' />
-						<html:submit styleClass="btn btn-primary validerForm" value ="Valider"></html:submit>
-				</html:form>
+			<div class="col-md-offset-4 col-md-6 ajoutContactGroupe">
+				<h1><bean:message key ="contact_groupe.ajouter"/></h1>
+				<div class="row">
+					<div class="col-md-offset-3">
+						<html:form styleClass="form-horizontal" action="/AddContactGroupe" method="post">
+							<html:errors />
+							<fieldset>
+								<%
+									for(Contact c : lesContacts)
+									{
+										String id = String.valueOf(c.getIdContact());
+								%> 
+										<div class="contactCheckbox">
+											<html:multibox styleClass = "contactCheckbox" property ="ids" value ="<%= id %>"/><%= c.getFirstName() + " " + c.getLastName() %>
+											<br>
+										</div>
+								<%
+									}
+								%>
+								<html:hidden property = "id" value = '<%= request.getParameter("id") %>' />
+								<html:submit styleClass="btn btn-primary validerForm" value ="Valider"></html:submit>
+							</fieldset>
+						</html:form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
    </html:html>
-

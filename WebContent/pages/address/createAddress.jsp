@@ -21,23 +21,23 @@
 	                <h1 class="formName col-md-offset-4"><bean:message key="add.address"/></h1>
 	                <div class="form-group">
 	
-	                    <label class="col-md-4 control-label"><bean:message key="address.rue"/></label>
+	                    <label class="col-md-4 control-label"><bean:message key="adresse.rue"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property = "street"/>
 	                    </div>
 	
-	                    <label class="col-md-4 control-label"><bean:message key="address.ville"/></label>
+	                    <label class="col-md-4 control-label"><bean:message key="adresse.ville"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property ="city"/>
 	                    </div>
 	
 	
-	                    <label class="col-md-4 control-label"><bean:message key="address.zip"/></label>
+	                    <label class="col-md-4 control-label"><bean:message key="adresse.zip"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property="zip"/>
 	                    </div>
 	                    
-	                    <label class="col-md-4 control-label"><bean:message key="address.country"/></label>
+	                    <label class="col-md-4 control-label"><bean:message key="adresse.pays"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property="country"/>
 	                    </div>	

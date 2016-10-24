@@ -21,7 +21,7 @@ public class DAOGroupe extends GlobalConnection {
 		Statement stmt;
 		try {
 			stmt = connection.createStatement();
-			stmt.executeUpdate("insert into groupe(name) values (\"" + name + "\");");
+			stmt.executeUpdate("insert into groupe(nom) values (\"" + name + "\");");
 			stmt.close();
 			return null;
 		} catch (SQLException sqle) {
@@ -37,7 +37,7 @@ public class DAOGroupe extends GlobalConnection {
 		ResultSet result = null;
 		try {
 			try (Statement stmt = connection.createStatement()) {
-				result = stmt.executeQuery("select * from groupe order by name asc");
+				result = stmt.executeQuery("select * from groupe order by nom asc");
 				while(result.next()) {
 					lesGroupes.add(new Groupe(result.getInt(1), result.getString(2)));		
 				}
@@ -82,7 +82,6 @@ public class DAOGroupe extends GlobalConnection {
 			for(String contact : ids) {
 				req = "insert into contact_groupe(idGroupe, idContact) values("+id+"," +contact+");";
 				stmt = connection.createStatement();
-				System.out.println(req);
 				stmt.executeUpdate(req);
 				stmt.close();
 			}
@@ -150,5 +149,23 @@ public class DAOGroupe extends GlobalConnection {
 		} finally {
 			closeConnection(connection);
 		}
+	}
+
+	public String removeFromGroupe(int idContact, int idGroupe) {
+		connection = checkConnection(connection);
+		String req = "delete from contact_groupe where idContact = ? and idGroupe = ?";
+		try {
+			try (PreparedStatement stmt = connection.prepareStatement(req)) {
+				stmt.setInt(1, idContact);
+				stmt.setInt(2, idGroupe);
+				stmt.executeUpdate();
+			}
+		} catch(SQLException sqle) {
+			sqle.printStackTrace();
+			return sqle.getMessage();
+		} finally {
+			closeConnection(connection);
+		}
+		return null;
 	}
 }

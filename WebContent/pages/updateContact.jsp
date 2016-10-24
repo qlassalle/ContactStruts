@@ -1,3 +1,4 @@
+<%@page import="domain.DAOGroupe"%>
 <%@page import="domain.DAOPhoneNumber"%>
 <%@page import="domain.DAOContact"%>
 <%@page import="models.Contact"%>
@@ -6,6 +7,8 @@
 <%@page import="models.Groupe"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
@@ -158,8 +161,8 @@
 							<html:param name="id"><%= number.getId() %></html:param>
 							<span class="glyphicon glyphicon-pencil"></span>
 						</html:link></td>
-					<td><html:link action="/DeleteNumber">
-							<html:param name="id"><%= number.getId()%></html:param>
+					<td><html:link action="/DeletePhoneNumber">
+							<html:param name="idPhoneNumber"><%= number.getId()%></html:param>
 							<span class="glyphicon glyphicon-remove"></span>
 						</html:link></td>
 				</tr>
@@ -178,6 +181,60 @@
 			</div>
 		</div>
 	</div>
+	
+<% 
+	Map<Integer, String> lesGroupes;
+	try {
+		lesGroupes = (HashMap<Integer, String>)daoc.getGroupes(contactId); 
+	} catch (NullPointerException npe) {
+		lesGroupes = null;
+	}
+%>
+
+	<div class="row">
+		<div class="col-md-offset-2 col-md-6 contactGroupe">				
+				<%
+					if(lesGroupes != null) {
+				%>
+						
+						<h1 class="formName col-md-offset-4">
+							<bean:message key="groupe.contact.list" />
+						</h1>
+						<table class="table table-striped table-bordered col-md-offset-2">
+							<thead>
+								<tr>
+									<th><bean:message key="groupe.name" /></th>
+								</tr>
+							</thead>
+				<%
+						for(int key : lesGroupes.keySet()) {
+				%>
+						<tr>
+							<td><%= lesGroupes.get(key) %></td>
+							<td><html:link action="/RemoveFromGroupe">
+									<html:param name="idGroupe"><%= key %></html:param>
+									<span class="glyphicon glyphicon-remove"></span>
+								</html:link></td>
+						</tr>
+				
+			<%
+						}
+			%>
+			
+			</table>
+			
+			<%
+				}
+					else {
+						%>
+							<h1 class = "col-md-offset-4 groupeNone">
+								<bean:message key = "groupe.none"/>
+							</h1>
+						<%
+					}
+			%>
+		</div>
+	</div>	
 
 </body>
 </html:html>

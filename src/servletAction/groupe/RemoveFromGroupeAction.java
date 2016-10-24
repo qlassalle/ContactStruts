@@ -1,4 +1,4 @@
-package servletAction.address;
+package servletAction.groupe;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,20 +8,20 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import domain.DAOAddress;
+import domain.DAOGroupe;
 
-public class DeleteAddressAction extends Action{
+public class RemoveFromGroupeAction extends Action {
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		
-		DAOAddress daoa = new DAOAddress();
-		String id = request.getQueryString();
-		int idAddress = Integer.valueOf(id.substring(3, id.length()));
-		final String error = daoa.delete(idAddress);
+		int idContact = (int)request.getSession().getAttribute("contactId");
+		String parameter = request.getQueryString();
+		int idGroupe = Integer.valueOf(parameter.substring(9, parameter.length()));
+		DAOGroupe daog = new DAOGroupe();
+		final String error = daog.removeFromGroupe(idContact, idGroupe);
 		
 		return error == null ? mapping.findForward("success") : mapping.findForward("erreur");
-	}	
+	}
 }

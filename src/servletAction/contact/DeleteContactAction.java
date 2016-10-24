@@ -18,7 +18,7 @@ public class DeleteContactAction extends Action {
 			final HttpServletResponse pResponse) throws Exception {
 		
 		String id = request.getQueryString();
-		int idContact = Integer.valueOf(id.substring(3, id.length()));
+		int idContact = Integer.valueOf(id.substring(10, id.length()));
 
 		final DAOContact daoc = new DAOContact();
 		final String error = daoc.delete(idContact);

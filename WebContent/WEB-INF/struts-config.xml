@@ -80,7 +80,7 @@
 			<forward name = "success" path="/pages/updateContact.jsp"/>
 			<forward name = "erreur" path="/pages/main.jsp"/>
 		</action>
-		
+				
 		<!-- ****************** GROUPE ***************** -->			
 		
 		<action path = "/AddGroupe" type = "servletAction.groupe.AddGroupeAction"
@@ -104,6 +104,11 @@
 		<action path = "/DeleteGroupe" type ="servletAction.groupe.DeleteGroupeAction">
 			<forward name = "success" path="/pages/main.jsp"/>
 		</action>
+		
+		<action path = "/RemoveFromGroupe" type ="servletAction.groupe.RemoveFromGroupeAction">
+			<forward name = "success" path="/pages/updateContact.jsp"/>
+			<forward name = "erreur" path="/pages/erreur.jsp"/>		
+		</action>
 				
 		<!-- ****************** Address ****************** -->
 
@@ -116,6 +121,7 @@
 		
 		<action path = "/DeleteAddress" type ="servletAction.address.DeleteAddressAction">
 			<forward name = "success" path="/pages/updateContact.jsp"/>
+			<forward name = "erreur" path="/pages/erreur.jsp"/>		
 		</action>
 		
 		<!-- ****************** PhoneNumber ****************** -->
@@ -126,7 +132,12 @@
 			<forward name = "success" path = "/pages/updateContact.jsp"/>
 			<forward name = "error" path = "/pages/error.jsp"/>
 		</action>			
-														
+							
+		<action path = "/DeletePhoneNumber" type ="servletAction.phoneNumber.DeletePhoneNumberAction">
+			<forward name = "success" path="/pages/updateContact.jsp"/>
+			<forward name = "erreur" path="/pages/erreur.jsp"/>		
+		</action>			
+								
 		</action-mappings>
 
 <!-- ========== Ressources de definitions de messages =========================== -->

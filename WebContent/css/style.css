@@ -39,7 +39,7 @@ label
     margin-top:10px;
 }
 
-.contactAdresse, .contactNumbers {
+.contactAdresse, .contactNumbers, .contactGroupe .ajoutContactGroupe {
 	margin-top: 30px;
 }
 
@@ -47,4 +47,13 @@ label
 	font-size: 14px;
 	text-align: center;
 	margin-top: 25px;
+}
+
+.contactCheckbox {
+	padding: 3px;
+}
+
+.groupeNone {
+	text-align: center;
+	margin-top: 50px;
 }

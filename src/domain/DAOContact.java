@@ -5,10 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import models.Address;
 import models.Contact;
+import models.Groupe;
 
 public class DAOContact extends GlobalConnection{
 
@@ -48,7 +51,6 @@ public class DAOContact extends GlobalConnection{
 			stmt.setInt(5, id);
 			result = stmt.executeUpdate();
 			stmt.close();
-			// connection.close();
 			return null;
 		} catch (SQLException e) {
 			return e.getMessage();
@@ -194,5 +196,35 @@ public class DAOContact extends GlobalConnection{
 		finally {
 			closeConnection(connection);
 		}
+	}
+	
+	public Map<Integer, String> getGroupes(int idContact) {
+		Map<Integer, String> lesGroupes = new HashMap<Integer, String>();
+		connection = checkConnection(connection);
+		try {
+			String req = "select idGroupe from contact_groupe where idContact = ?";
+			ResultSet result, groupeResult;
+			try (PreparedStatement stmt = connection.prepareStatement(req)) {
+				stmt.setInt(1, idContact);
+				result = stmt.executeQuery();
+				while(result.next()){
+					String sql = "select id, nom from groupe where id = ?";
+					try(PreparedStatement pstmt = connection.prepareStatement(sql)) {
+						pstmt.setInt(1, result.getInt(1));
+						groupeResult = pstmt.executeQuery();
+						while(groupeResult.next()) {
+							lesGroupes.put(groupeResult.getInt(1), groupeResult.getString(2));
+						}
+					}
+				}
+			}
+		}
+		catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		finally {
+			closeConnection(connection);
+		}
+		return !lesGroupes.isEmpty() ? lesGroupes : null;
 	}
 }

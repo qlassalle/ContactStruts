@@ -53,4 +53,42 @@ public class DAOPhoneNumber extends GlobalConnection{
 			closeConnection(connection);
 		}
 	}
+
+	public String update(int id, String kind, String number) {
+		connection = checkConnection(connection);
+		int result = 0;
+		String req = "update PhoneNumber set id = ?, kind = ?, number = ? where id = ?";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(req);
+			stmt.setInt(1, id);
+			stmt.setString(2, kind);
+			stmt.setString(3, number);
+			stmt.setInt(4, id);
+			result = stmt.executeUpdate();
+			stmt.close();
+			return null;
+		} catch (SQLException e) {
+			return e.getMessage();
+		}
+		finally {
+			closeConnection(connection);
+		}
+	}
+
+	public String delete(int id){
+		connection = checkConnection(connection);
+		String req = "delete from phone where id = ?";
+		try{
+			try(PreparedStatement stmt = connection.prepareStatement(req)) {
+				stmt.setInt(1, id);
+				stmt.executeUpdate();
+			}
+		} catch(SQLException sqle) {
+			return sqle.getMessage();
+		}
+		finally {
+			closeConnection(connection);
+		}
+		return null;
+	}
 }
