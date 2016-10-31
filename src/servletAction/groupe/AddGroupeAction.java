@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionMapping;
 
 import actionForm.groupe.AddGroupeValidationForm;
 import domain.DAOGroupe;
+import services.GroupeService;
 import servletAction.AccueilAction;
 
 public class AddGroupeAction extends Action {
@@ -22,8 +23,8 @@ public class AddGroupeAction extends Action {
 		
 		final String name = gvf.getName();
 		
-		final DAOGroupe daog = new DAOGroupe();
-		final String error = daog.save(name);
+		final GroupeService gs = new GroupeService();
+		final String error = gs.save(name);
 		
 		final AccueilAction accueil = new AccueilAction();
 		

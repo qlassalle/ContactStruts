@@ -53,6 +53,7 @@ public class DAOContact extends GlobalConnection{
 			stmt.close();
 			return null;
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return e.getMessage();
 		}
 		finally {

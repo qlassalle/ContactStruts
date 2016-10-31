@@ -12,6 +12,8 @@ import org.apache.struts.action.ActionMapping;
 import actionForm.address.AddAddressValidationForm;
 import domain.DAOAddress;
 import domain.DAOContact;
+import services.AddressService;
+import services.ContactService;
 import servletAction.AccueilAction;
 
 public class AddAddressAction extends Action{
@@ -31,12 +33,12 @@ public class AddAddressAction extends Action{
 		final String country = lForm.getCountry();
 		
 		// create a new Address
-		final DAOAddress daoa = new DAOAddress();
-		final int idAddress = daoa.save(street, city, zip, country);
+		AddressService as = new AddressService();
+		final int idAddress = as.addAddress(street, city, zip, country);
 		
 		// add the address to the contact
-		final DAOContact daoc = new DAOContact();
-		final String erreur = daoc.addAddress(idContact, idAddress);
+		final ContactService cs = new ContactService();
+		final String erreur = cs.addAddress(idContact, idAddress);
 		
 		return erreur == null ? mapping.findForward("success") : mapping.findForward("erreur");
 	}

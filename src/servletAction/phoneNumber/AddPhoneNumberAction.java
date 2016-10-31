@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionMapping;
 
 import actionForm.phoneNumber.AddPhoneNumberValidationForm;
 import domain.DAOPhoneNumber;
+import services.PhoneNumberService;
 
 public class AddPhoneNumberAction extends Action{
 
@@ -23,8 +24,8 @@ public class AddPhoneNumberAction extends Action{
 		final String kind = apnvf.getKind();
 		final String number = apnvf.getNumber();
 		
-		DAOPhoneNumber daop = new DAOPhoneNumber();
-		final String error = daop.save(kind, number, idContact);
+		PhoneNumberService pns = new PhoneNumberService();
+		final String error = pns.save(kind, number, idContact);
 		
 		return error == null ? mapping.findForward("success") : mapping.findForward("error");
 		

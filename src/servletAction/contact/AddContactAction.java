@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionMessages;
 
 import actionForm.contact.AddContactValidationForm;
 import domain.DAOContact;
+import services.ContactService;
 import servletAction.AccueilAction;
 
 public class AddContactAction extends Action {
@@ -30,8 +31,8 @@ public class AddContactAction extends Action {
 		final String email = lForm.getEmail();
 
 		// create a new Contact
-		final DAOContact daoc = new DAOContact();
-		final String error = daoc.save(firstName, lastName, email);
+		ContactService cs = new ContactService();
+		final String error = cs.addContact(firstName, lastName, email);
 		
 		final AccueilAction accueil = new AccueilAction();
 		

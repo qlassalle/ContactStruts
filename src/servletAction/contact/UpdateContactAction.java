@@ -20,7 +20,7 @@ public class UpdateContactAction extends Action {
 		
 		final UpdateContactValidationForm uForm = (UpdateContactValidationForm)form;
 		
-		final int id = uForm.getIdContact();
+		final int id = (int)request.getSession().getAttribute("contactId");
 		final String firstName = uForm.getFirstName();
 		final String lastName = uForm.getLastName();
 		final String email = uForm.getEmail();
@@ -32,5 +32,4 @@ public class UpdateContactAction extends Action {
 
 		return error == null ? accueil.execute(mapping, form, request, response) : mapping.findForward("error");
 	}
-	
 }

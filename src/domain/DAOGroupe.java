@@ -73,7 +73,7 @@ public class DAOGroupe extends GlobalConnection {
 		return null;
 	}
 
-	public void addContact(int id, String[] ids) {
+	public void AddContact(int id, String[] ids) {
 		deleteAllContacts(id);
 		connection = checkConnection(connection);
 		Statement stmt;

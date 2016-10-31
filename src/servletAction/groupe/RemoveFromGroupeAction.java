@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import domain.DAOGroupe;
+import services.GroupeService;
 
 public class RemoveFromGroupeAction extends Action {
 
@@ -19,8 +20,8 @@ public class RemoveFromGroupeAction extends Action {
 		int idContact = (int)request.getSession().getAttribute("contactId");
 		String parameter = request.getQueryString();
 		int idGroupe = Integer.valueOf(parameter.substring(9, parameter.length()));
-		DAOGroupe daog = new DAOGroupe();
-		final String error = daog.removeFromGroupe(idContact, idGroupe);
+		GroupeService gs = new GroupeService();
+		final String error = gs.removeFromGroupe(idContact, idGroupe);
 		
 		return error == null ? mapping.findForward("success") : mapping.findForward("erreur");
 	}

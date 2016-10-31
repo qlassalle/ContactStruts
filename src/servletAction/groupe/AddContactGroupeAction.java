@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionMapping;
 
 import actionForm.groupe.AddContactGroupeValidationForm;
 import domain.DAOGroupe;
+import services.GroupeService;
 import servletAction.AccueilAction;
 
 public class AddContactGroupeAction extends Action{
@@ -20,8 +21,8 @@ public class AddContactGroupeAction extends Action{
 		
 		AddContactGroupeValidationForm gform = (AddContactGroupeValidationForm)form;
 
-		DAOGroupe daog = new DAOGroupe();
-		daog.addContact(gform.getId(), gform.getIds());
+		GroupeService gs = new GroupeService();
+		gs.AddContact(gform.getId(), gform.getIds());
 		
 		AccueilAction accueil = new AccueilAction();
 		return accueil.execute(mapping, form, request, response);

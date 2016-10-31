@@ -1,3 +1,5 @@
+<%@page import="services.PhoneNumberService"%>
+<%@page import="services.ContactService"%>
 <%@page import="domain.DAOGroupe"%>
 <%@page import="domain.DAOPhoneNumber"%>
 <%@page import="domain.DAOContact"%>
@@ -26,7 +28,7 @@
 	<body>
 	
 <%
-	DAOContact daoc = new DAOContact();
+	ContactService cs = new ContactService();
 	int contactId;
 	if(request.getParameter("idContact") != null) {
 		contactId = Integer.valueOf(request.getParameter("idContact")); 
@@ -39,7 +41,7 @@
 			contactId = (int)session.getAttribute("contactId");
 		}
 	}
-	Contact c = daoc.getContactById(contactId);
+	Contact c = cs.getContactById(contactId);
 %>	
 		<div class="row">
 			<div class="col-md-offset-2 col-md-6">
@@ -72,7 +74,7 @@
 	Address address;
 	try
 	{
-		address = daoc.getContactAddress(contactId);
+		address = cs.getContactAddress(contactId);
 	}
 	catch (NullPointerException npe)
 	{
@@ -129,9 +131,9 @@
 		
 <% 
 	List<PhoneNumber> numbers;
-	DAOPhoneNumber daop = new DAOPhoneNumber();
+	PhoneNumberService pns = new PhoneNumberService();
 	try {
-		numbers = (ArrayList<PhoneNumber>)daop.getPhoneNumbers(contactId); 
+		numbers = (ArrayList<PhoneNumber>)pns.getPhoneNumbers(contactId); 
 	} catch (NullPointerException npe) {
 		numbers = null;
 	}
@@ -185,7 +187,7 @@
 <% 
 	Map<Integer, String> lesGroupes;
 	try {
-		lesGroupes = (HashMap<Integer, String>)daoc.getGroupes(contactId); 
+		lesGroupes = (HashMap<Integer, String>)cs.getGroupes(contactId); 
 	} catch (NullPointerException npe) {
 		lesGroupes = null;
 	}

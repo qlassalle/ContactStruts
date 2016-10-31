@@ -14,6 +14,8 @@ import org.apache.struts.action.ActionMapping;
 import domain.DAOContact;
 import domain.DAOGroupe;
 import models.Groupe;
+import services.ContactService;
+import services.GroupeService;
 
 public class AccueilAction extends Action{
 
@@ -21,17 +23,17 @@ public class AccueilAction extends Action{
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		final DAOContact daoc = new DAOContact();
-		final DAOGroupe daog = new DAOGroupe();
+		final ContactService cs = new ContactService();
+		final GroupeService gs = new GroupeService();
 		List<Integer> nbMembre = new ArrayList<Integer>();
 		
-		ArrayList<Groupe> lesGroupes = (ArrayList<Groupe>)daog.getAllGroupes();
+		ArrayList<Groupe> lesGroupes = (ArrayList<Groupe>)gs.getAllGroupes();
 		request.setAttribute("lesGroupes", lesGroupes);
 		for(Groupe groupe : lesGroupes) {
-			nbMembre.add(daog.getNbMembre(groupe.getId()));
+			nbMembre.add(gs.getNbMembre(groupe.getId()));
 		}
 		request.setAttribute("nbMembre", nbMembre);
-		request.setAttribute("lesContacts", daoc.getAllContacts());
+		request.setAttribute("lesContacts", cs.getAllContacts());
 		return mapping.findForward("success");
 	}	
 }

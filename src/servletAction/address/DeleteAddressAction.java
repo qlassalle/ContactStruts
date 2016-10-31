@@ -8,19 +8,18 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import domain.DAOAddress;
+import services.AddressService;
 
 public class DeleteAddressAction extends Action{
 
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		
-		DAOAddress daoa = new DAOAddress();
 		String id = request.getQueryString();
 		int idAddress = Integer.valueOf(id.substring(3, id.length()));
-		final String error = daoa.delete(idAddress);
+		AddressService as = new AddressService();
+		final String error = as.delete(idAddress);
 		
 		return error == null ? mapping.findForward("success") : mapping.findForward("erreur");
 	}	

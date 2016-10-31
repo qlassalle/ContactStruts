@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import domain.DAOContact;
+import services.ContactService;
 import servletAction.AccueilAction;
 
 public class DeleteContactAction extends Action {
@@ -20,8 +21,8 @@ public class DeleteContactAction extends Action {
 		String id = request.getQueryString();
 		int idContact = Integer.valueOf(id.substring(10, id.length()));
 
-		final DAOContact daoc = new DAOContact();
-		final String error = daoc.delete(idContact);
+		final ContactService cs = new ContactService();
+		final String error = cs.delete(idContact);
 		
 		final AccueilAction accueil = new AccueilAction();
 		

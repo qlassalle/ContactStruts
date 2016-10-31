@@ -13,6 +13,8 @@ import org.apache.struts.action.ActionMapping;
 import domain.DAOContact;
 import domain.DAOGroupe;
 import models.Contact;
+import services.ContactService;
+import services.GroupeService;
 
 public class GetGroupeInfoAction extends Action{
 
@@ -24,11 +26,11 @@ public class GetGroupeInfoAction extends Action{
 		parameter = parameter.substring(3, parameter.length());
 		int idGroupe = Integer.valueOf(parameter);
 		
-		DAOContact daoc = new DAOContact();
-		DAOGroupe daog = new DAOGroupe();
-		ArrayList<Contact> lesContacts = (ArrayList<Contact>)daoc.getAllContacts();
-		ArrayList<Contact> lesMembres = (ArrayList<Contact>)daog.getMembres(Integer.valueOf(idGroupe));
-		String []membres = new String[daog.getNbMembre(idGroupe)];
+		ContactService cs = new ContactService();
+		GroupeService gs = new GroupeService();
+		ArrayList<Contact> lesContacts = (ArrayList<Contact>)cs.getAllContacts();
+		ArrayList<Contact> lesMembres = (ArrayList<Contact>)gs.getMembres(Integer.valueOf(idGroupe));
+		String []membres = new String[gs.getNbMembre(idGroupe)];
 		
 		request.setAttribute("lesContacts", lesContacts);
 		request.setAttribute("lesMembres", lesMembres);

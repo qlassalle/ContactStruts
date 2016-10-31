@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import domain.DAOGroupe;
+import services.GroupeService;
 import servletAction.AccueilAction;
 
 public class DeleteGroupeAction extends Action{
@@ -17,10 +18,10 @@ public class DeleteGroupeAction extends Action{
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		DAOGroupe daog = new DAOGroupe();
+		GroupeService gs = new GroupeService();
 		String id = request.getQueryString();
 		int idGroupe = Integer.valueOf(id.substring(3, id.length()));
-		final String error = daog.delete(idGroupe);
+		final String error = gs.delete(idGroupe);
 	
 		AccueilAction accueil = new AccueilAction();
 		

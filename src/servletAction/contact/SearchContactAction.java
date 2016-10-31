@@ -14,6 +14,7 @@ import org.apache.struts.action.ActionMapping;
 import actionForm.contact.SearchContactValidationForm;
 import domain.DAOContact;
 import models.Contact;
+import services.ContactService;
 
 public class SearchContactAction extends Action{
 
@@ -25,10 +26,10 @@ public class SearchContactAction extends Action{
 		
 		final String firstName = sform.getFirstName();
 		
-		final DAOContact daoc = new DAOContact();
+		final ContactService cs = new ContactService();
 				
 		// TODO manage doublons
-		ArrayList<Contact> c = (ArrayList<Contact>)daoc.getContactByFirstName(firstName);
+		ArrayList<Contact> c = (ArrayList<Contact>)cs.getContactByFirstName(firstName);
 		request.getSession().setAttribute("contactId", c.get(0).getIdContact());
 		
 		return !c.isEmpty() ? mapping.findForward("success") : mapping.findForward("erreur");
