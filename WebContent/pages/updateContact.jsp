@@ -1,3 +1,4 @@
+<%@page import="services.AddressService"%>
 <%@page import="services.PhoneNumberService"%>
 <%@page import="services.ContactService"%>
 <%@page import="domain.DAOGroupe"%>
@@ -17,7 +18,6 @@
 <%@ taglib prefix="nested" uri="http://struts.apache.org/tags-nested" %>
 <jsp:include page="entete.jsp"></jsp:include>
   
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html:html>
 
 
@@ -29,6 +29,7 @@
 	
 <%
 	ContactService cs = new ContactService();
+	AddressService as = new AddressService();
 	int contactId;
 	if(request.getParameter("idContact") != null) {
 		contactId = Integer.valueOf(request.getParameter("idContact")); 
@@ -49,13 +50,13 @@
 					<fieldset>
 						<h1 class="formName col-md-offset-4"><bean:message key = "maj.contact"/></h1>
 						<div class="form-group">
-							<label class="col-md-4 control-label">Nom</label>
-							<div class="col-md-8">
-								<html:text styleClass="form-control inputForm" property = "lastName" value = '<%= c.getLastName() %>'/>
-							</div>
 							<label class="col-md-4 control-label">Prenom</label>
 							<div class="col-md-8">
 								<html:text styleClass="form-control inputForm" property = "firstName" value = '<%= c.getFirstName() %>'/>
+							</div>
+							<label class="col-md-4 control-label">Nom</label>
+							<div class="col-md-8">
+								<html:text styleClass="form-control inputForm" property = "lastName" value = '<%= c.getLastName() %>'/>
 							</div>
 							<label class="col-md-4 control-label">Mail</label>
 							<div class="col-md-8">
@@ -72,60 +73,45 @@
 		</div>
 <%
 	Address address;
+	List<Address> addresses;
+	String addressId;
+	addresses = as.getAllAddresses();
+	address = cs.getContactAddress(contactId);
 	try
 	{
-		address = cs.getContactAddress(contactId);
+		addressId = String.valueOf(address.getId());
 	}
 	catch (NullPointerException npe)
 	{
-		address = null;
+		addressId = "0";
 	}
 %>		
 		
 		<div class="row">
 			<div class="col-md-offset-2 col-md-6 contactAdresse">
 				<h1 class="formName col-md-offset-4"><bean:message key = "adresse.contact"/></h1>
-				<%
-					if(address != null) {
-				%>
-					<table class = "table table-striped table-bordered col-md-offset-2">
-						<thead>
-							<tr>
-								<th><bean:message key = "adresse.pays"/></th>
-								<th><bean:message key = "adresse.zip"/></th>
-								<th><bean:message key = "adresse.ville"/></th>
-								<th><bean:message key = "adresse.rue"/></th>
-							</tr>
-						</thead>
-								<tr>					
-									<td><%= address.getCountry() %></td>
-									<td><%= address.getZip() %></td>
-									<td><%= address.getCity() %></td>
-									<td><%= address.getStreet() %></td>
-									<td><html:link action ="address/updateAddress.jsp">
-											<html:param name="id"><%= address.getId() %></html:param>
-											<span class = "glyphicon glyphicon-pencil"></span>
-										</html:link>
-									</td>
-									<td>
-									<html:link action ="/DeleteAddress">
-											<html:param name = "id"><%= address.getId()%></html:param>
-											<span class="glyphicon glyphicon-remove"></span>
-										</html:link>
-									</td>
-								</tr>
-					</table>					
-				<%
-				} else {
-					%>
-					<div class="col-md-offset-4">
-						<html:link action="address/createAddress.jsp">
-						<p class ="ajoutAttribut"><bean:message key = "creation.adresse.contact"/></p>
-						</html:link>
+				<div class="row">
+					<div class="col-md-offset-4 col-md-8">
+						<html:form action="/SelectAddress">
+							<html:select property="id" value="<%= addressId %>">
+							
+										<html:option value="0">
+											Sélectionner une adresse
+										</html:option>
+								<%
+									for(Address anAddress : addresses) {
+										%>
+										 <html:option value="<%= String.valueOf(anAddress.getId()) %>">
+										 	<%= anAddress.toString() %>
+										 </html:option>								 								 
+										<%
+									}
+								%> 
+							</html:select>
+							<html:submit styleClass="btn btn-primary validerForm col-md-offset-4" value="Valider" />
+						</html:form>
 					</div>
-				<%
-				}
-				%>
+				</div>				
 			</div>
 		</div>
 		

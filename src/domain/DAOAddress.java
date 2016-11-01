@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import models.Address;
 
@@ -79,6 +81,47 @@ public class DAOAddress extends GlobalConnection{
 				return null;
 			}
 		} catch (SQLException sqle) {
+			return sqle.getMessage();
+		} finally {
+			closeConnection(connection);
+		}
+	}
+
+	public List<Address> getAllAddresses() {
+		connection = checkConnection(connection);
+		List<Address> addresses = new ArrayList<Address>();
+		String req = "select * from address ORDER BY zip ASC";
+		try {
+			try(Statement stmt = connection.createStatement()) {
+				ResultSet result = stmt.executeQuery(req);
+				while(result.next()) {
+					addresses.add(new Address(result.getInt(1), result.getString(2), result.getString(3),
+							result.getString(4), result.getString(5)));
+				}
+			}
+		}
+		catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return addresses;
+	}
+
+	public String update(String street, String city, String zip, String country, int id) {
+		connection = checkConnection(connection);
+		String req = "update address set id = ?, street = ?, city = ?, zip = ?, country = ? where id = ?";
+		try {
+			try(PreparedStatement stmt = connection.prepareStatement(req)) {
+				stmt.setInt(1, id);
+				stmt.setString(2, street);
+				stmt.setString(3, city);
+				stmt.setString(4, zip);
+				stmt.setString(5, country);
+				stmt.setInt(6, id);
+				stmt.executeUpdate();
+				return null;
+			}
+		} catch(SQLException sqle) {
+			sqle.printStackTrace();
 			return sqle.getMessage();
 		} finally {
 			closeConnection(connection);

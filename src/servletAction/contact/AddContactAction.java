@@ -32,7 +32,7 @@ public class AddContactAction extends Action {
 
 		// create a new Contact
 		ContactService cs = new ContactService();
-		final String error = cs.addContact(firstName, lastName, email);
+		final String error = cs.addContact(lastName, firstName, email);
 		
 		final AccueilAction accueil = new AccueilAction();
 		

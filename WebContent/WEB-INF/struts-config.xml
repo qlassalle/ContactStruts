@@ -13,6 +13,8 @@
 		<form-bean name="AddGroupeValidationForm" type="actionForm.groupe.AddGroupeValidationForm"/>
 		<form-bean name="AddContactGroupeValidationForm" type="actionForm.groupe.AddContactGroupeValidationForm"/>
 		<form-bean name="AddAddressValidationForm" type="actionForm.address.AddAddressValidationForm"/>
+		<form-bean name="SelectAddressValidationForm" type="actionForm.address.SelectAddressValidationForm"/>	
+		<form-bean name="UpdateAddressValidationForm" type="actionForm.address.UpdateAddressValidationForm"/>			
 		<form-bean name="AddPhoneNumberValidationForm" type="actionForm.phoneNumber.AddPhoneNumberValidationForm"/>			
 	</form-beans>
 	
@@ -47,6 +49,8 @@
 		<!-- *************************** Address links ************************** -->
 		
 		<action path="/address/createAddress" forward="/pages/address/createAddress.jsp"/>
+	
+		<action path="/address/updateAddress" forward="/pages/address/updateAddress.jsp"/>
 						
 		<!-- *************************** PhoneNumber links ************************** -->
 		
@@ -115,8 +119,8 @@
 		<action path = "/AddAddress" type = "servletAction.address.AddAddressAction"
 				name = "AddAddressValidationForm" scope = "request"
 				input = "/pages/address/createAddress.jsp">
-			<forward name = "success" path = "/pages/updateContact.jsp"/>
-			<forward name = "error" path = "/pages/error.jsp"/>
+			<forward name = "success" path = "/pages/main.jsp"/>
+			<forward name = "erreur" path = "/pages/error.jsp"/>
 		</action>
 		
 		<action path = "/DeleteAddress" type ="servletAction.address.DeleteAddressAction">
@@ -124,6 +128,20 @@
 			<forward name = "erreur" path="/pages/erreur.jsp"/>		
 		</action>
 		
+		<action path = "/SelectAddress" type = "servletAction.address.SelectAddressAction"
+				name = "SelectAddressValidationForm" scope = "request"
+				input = "/pages/updateContact.jsp">
+			<forward name = "success" path = "/pages/updateContact.jsp"/>
+			<forward name = "error" path = "/pages/error.jsp"/>
+		</action>
+		
+		<action path = "/UpdateAddress" type = "servletAction.address.UpdateAddressAction"
+				name = "UpdateAddressValidationForm" scope ="request"
+				input = "/pages/address/updateAddress.jsp">
+				<forward name = "success" path = "/pages/address/updateAddress.jsp"/>
+				<forward name = "erreur" path = "/pages/error.jsp"/>
+		</action>
+				
 		<!-- ****************** PhoneNumber ****************** -->
 			
 		<action path = "/AddPhoneNumber" type = "servletAction.phoneNumber.AddPhoneNumberAction"

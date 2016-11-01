@@ -23,7 +23,6 @@ public class AddAddressAction extends Action{
 			HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession();
-		int idContact = (int)session.getAttribute("contactId");
 		
 		final AddAddressValidationForm lForm=(AddAddressValidationForm)form;
 		
@@ -35,11 +34,7 @@ public class AddAddressAction extends Action{
 		// create a new Address
 		AddressService as = new AddressService();
 		final int idAddress = as.addAddress(street, city, zip, country);
-		
-		// add the address to the contact
-		final ContactService cs = new ContactService();
-		final String erreur = cs.addAddress(idContact, idAddress);
-		
-		return erreur == null ? mapping.findForward("success") : mapping.findForward("erreur");
+				
+		return idAddress != 0 ? mapping.findForward("success") : mapping.findForward("erreur");
 	}
 }

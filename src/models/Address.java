@@ -54,4 +54,10 @@ public class Address {
 		return this.country;
 	}
 
+	@Override
+	public String toString() {
+		return street + ", " + zip + " " + city + ", " + country;
+	}
+
+	
 }

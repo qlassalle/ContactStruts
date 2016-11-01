@@ -41,7 +41,6 @@ public class DAOContact extends GlobalConnection{
 		connection = checkConnection(connection);
 		int result = 0;
 		String req = "update contact set id = ?, nom = ?, prenom = ?, email = ? where id = ?";
-		System.out.println("id:" + id);
 		try {
 			PreparedStatement stmt = connection.prepareStatement(req);
 			stmt.setInt(1, id);
@@ -188,7 +187,6 @@ public class DAOContact extends GlobalConnection{
 				stmt.setInt(1, idAddress);
 				stmt.setInt(2, id);
 				stmt.executeUpdate();
-				stmt.close();
 				return null;
 			}
 		} catch(SQLException sqle) {
@@ -197,6 +195,7 @@ public class DAOContact extends GlobalConnection{
 		finally {
 			closeConnection(connection);
 		}
+		
 	}
 	
 	public Map<Integer, String> getGroupes(int idContact) {

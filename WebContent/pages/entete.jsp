@@ -17,22 +17,24 @@
 
 <nav class="navbar navbar-default">
     <div class="row">
-        <ul class="nav navbar-nav col-md-6">
-            <li class="col-md-4">
+        <ul class="nav navbar-nav col-md-8">
+            <li class="col-md-3">
                 <html:link action="/Accueil"><bean:message key="main.accueil"/></html:link>
             </li>
-            <li class="col-md-4">
+            <li class="col-md-3">
                 <html:link action="createContact.jsp"><bean:message key="main.ajouter"/></html:link>
             </li>
-            <li class="col-md-4">
+            <li class="col-md-3">
             	<html:link action = "groupe/createGroupe.jsp"><bean:message key="groupe.ajouter"/></html:link>
             </li>
+            <li class="col-md-3">
+            	<html:link action = "address/createAddress.jsp"><bean:message key="address.ajouter"/></html:link>
+            </li>
         </ul>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <html:form action="/SearchContact" styleClass="navbar-form inline-form" method = "post">
                 <div class="form-group">
                     <html:text property ="firstName" styleClass="input-md form-control"/>
-                    <!--<html:submit styleClass="btn btn-primary btn-md"><span class="glyphicon glyphicon-eye-open"></span> Rechercher un contact</html:submit>-->
                     <html:submit styleClass="btn btn-primary btn-md" value = "Rechercher un contact"/>
                 </div>
             </html:form>

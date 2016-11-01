@@ -1,6 +1,9 @@
 package services;
 
+import java.util.List;
+
 import domain.DAOAddress;
+import models.Address;
 
 public class AddressService {
 
@@ -17,5 +20,17 @@ public class AddressService {
 	
 	public String delete(int idAddress) {
 		return daoa.delete(idAddress);
+	}
+	
+	public List<Address> getAllAddresses() {
+		return daoa.getAllAddresses();
+	}
+
+	public String update(String street, String city, String zip, String country, int id) {
+		return daoa.update(street,city,zip,country,id);
+	}
+	
+	public Address getAddress(int id) {
+		return daoa.getAddress(id);
 	}
 }

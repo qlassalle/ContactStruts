@@ -24,14 +24,14 @@
 	                <h1 class="formName col-md-offset-4"><bean:message key="add.contact"/></h1>
 	                <div class="form-group">
 	
+		                <label class="col-md-4 control-label">Prénom</label>
+	                    <div class="col-md-8">
+	                        <html:text styleClass="form-control inputForm" property ="firstName"/>
+	                    </div>
+	                    
 	                    <label class="col-md-4 control-label">Nom</label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property = "lastName"/>
-	                    </div>
-	
-	                    <label class="col-md-4 control-label">Prénom</label>
-	                    <div class="col-md-8">
-	                        <html:text styleClass="form-control inputForm" property ="firstName"/>
 	                    </div>
 	
 	

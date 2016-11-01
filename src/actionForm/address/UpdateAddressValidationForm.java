@@ -1,9 +1,10 @@
 package actionForm.address;
 
-public class AddAddressValidationForm extends AddressValidationForm{
+public class UpdateAddressValidationForm extends AddressValidationForm {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 }

@@ -9,6 +9,7 @@
 
 	<jsp:include page="elements/contactDisplay.jsp"></jsp:include>
 	<jsp:include page="elements/groupeDisplay.jsp"></jsp:include>
+	<jsp:include page="elements/adresseDisplay.jsp"></jsp:include>
 </body>
 
 </html>
