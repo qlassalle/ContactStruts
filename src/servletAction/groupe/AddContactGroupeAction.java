@@ -9,7 +9,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionForm.groupe.AddContactGroupeValidationForm;
-import domain.DAOGroupe;
 import services.GroupeService;
 import servletAction.AccueilAction;
 

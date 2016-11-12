@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import services.AddressService;
+import servletAction.AccueilAction;
 
 public class DeleteAddressAction extends Action{
 
@@ -21,6 +22,8 @@ public class DeleteAddressAction extends Action{
 		AddressService as = new AddressService();
 		final String error = as.delete(idAddress);
 		
-		return error == null ? mapping.findForward("success") : mapping.findForward("erreur");
+		AccueilAction accueil = new AccueilAction();
+		
+		return accueil.execute(mapping, form, request, response);
 	}	
 }

@@ -19,9 +19,9 @@
 	<table class = "table table-striped table-bordered">
 		<thead>
 			<tr>
-				<th>Prénom</th>
-				<th>Nom</th>
-				<th>Email</th>
+				<th><bean:message key="contact.prenom"/></th>
+				<th><bean:message key="contact.nom"/></th>
+				<th><bean:message key="contact.email"/></th>
 			</tr>
 		</thead>
  			<%

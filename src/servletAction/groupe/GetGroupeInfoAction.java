@@ -10,8 +10,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import domain.DAOContact;
-import domain.DAOGroupe;
 import models.Contact;
 import services.ContactService;
 import services.GroupeService;

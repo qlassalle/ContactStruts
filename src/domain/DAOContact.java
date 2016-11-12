@@ -1,5 +1,6 @@
 package domain;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,19 +12,20 @@ import java.util.Map;
 
 import models.Address;
 import models.Contact;
-import models.Groupe;
 
-public class DAOContact extends GlobalConnection{
+public class DAOContact {
 
+	private static Connection connexion;
+	
 	public DAOContact() {
-		super();
+		connexion = GlobalConnection.getInstance();
 	}
 
 	public String save(String nom, String prenom, String email) {
-		connection = checkConnection(connection);
+		connexion = GlobalConnection.getInstance();
 		Statement stmt;
 		try {
-			stmt = connection.createStatement();
+			stmt = connexion.createStatement();
 			stmt.executeUpdate("insert into contact(nom, prenom, email) values(\"" + nom + "\",\""
 					+ prenom + "\",\"" + email + "\");");
 			stmt.close();
@@ -33,16 +35,16 @@ public class DAOContact extends GlobalConnection{
 			return e.getMessage();
 		}
 		finally {
-			closeConnection(connection);
+			GlobalConnection.closeConnection(connexion);
 		}
 	}
 
 	public String update(int id, String nom, String prenom, String email) {
-		connection = checkConnection(connection);
+		connexion = GlobalConnection.getInstance();
 		int result = 0;
 		String req = "update contact set id = ?, nom = ?, prenom = ?, email = ? where id = ?";
 		try {
-			PreparedStatement stmt = connection.prepareStatement(req);
+			PreparedStatement stmt = connexion.prepareStatement(req);
 			stmt.setInt(1, id);
 			stmt.setString(2, nom);
 			stmt.setString(3, prenom);
@@ -56,15 +58,15 @@ public class DAOContact extends GlobalConnection{
 			return e.getMessage();
 		}
 		finally {
-			closeConnection(connection);
+			GlobalConnection.closeConnection(connexion);
 		}
 	}
 
 	public String delete(int id) {
-		connection = checkConnection(connection);
+		connexion = GlobalConnection.getInstance();
 		String req = "delete from contact where id = ?";
 		try {
-			try (PreparedStatement stmt = connection.prepareStatement(req)) {
+			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
 				stmt.setInt(1, id);
 				stmt.executeUpdate();
 				stmt.close();
@@ -73,7 +75,7 @@ public class DAOContact extends GlobalConnection{
 			return sqle.getMessage();
 		}
 		finally {
-			closeConnection(connection);
+			GlobalConnection.closeConnection(connexion);
 		}
 		return null;
 	}
@@ -83,11 +85,11 @@ public class DAOContact extends GlobalConnection{
 	}
 
 	public List<Contact> getAllContacts() {
-		connection = checkConnection(connection);
+		connexion = GlobalConnection.getInstance();
 		List<Contact> lesContacts = new ArrayList<Contact>();
 		ResultSet result = null;
 		try {
-			try (Statement stmt = connection.createStatement()) {
+			try (Statement stmt = connexion.createStatement()) {
 				result = stmt.executeQuery("select * from contact ORDER BY nom ASC");
 				while (result.next()) {
 					lesContacts.add(new Contact(result.getLong(1), result.getString(2), result.getString(3),
@@ -102,19 +104,19 @@ public class DAOContact extends GlobalConnection{
 			e.printStackTrace();
 		}
 		finally {
-			closeConnection(connection);
+			GlobalConnection.closeConnection(connexion);
 		}
 		return lesContacts;
 	}
 
 	public List<Contact> getContact(String firstName) {
-		connection = checkConnection(connection);
+		connexion = GlobalConnection.getInstance();
 		List<Contact> lesContacts = new ArrayList<Contact>();
 		Contact c = null;
 		try {
 			String req = "select * from contact where nom like ?";
 			ResultSet result;
-			try (PreparedStatement stmt = connection.prepareStatement(req)) {
+			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
 				stmt.setString(1, "%" + firstName + "%");
 				result = stmt.executeQuery();
 				while (result.next()) {
@@ -126,18 +128,18 @@ public class DAOContact extends GlobalConnection{
 			e.printStackTrace();
 		}
 		finally {
-			closeConnection(connection);
+			GlobalConnection.closeConnection(connexion);
 		}
 		return lesContacts;
 	}
 	
 	public Contact getContactById(int id) {
-		connection = checkConnection(connection);
+		connexion = GlobalConnection.getInstance();
 		Contact c = null;
 		try {
 			String req = "select * from contact where id like ?";
 			ResultSet result;
-			try (PreparedStatement stmt = connection.prepareStatement(req)) {
+			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
 				stmt.setInt(1, id);
 				result = stmt.executeQuery();
 				while (result.next()) {
@@ -148,7 +150,7 @@ public class DAOContact extends GlobalConnection{
 			e.printStackTrace();
 		}
 		finally {
-			closeConnection(connection);
+			// no need to close here, this method is already called be a method closing connection
 		}
 		return c;
 	}
@@ -156,12 +158,12 @@ public class DAOContact extends GlobalConnection{
 	
 	public Address getContactAddress(int id)
 	{
+		connexion = GlobalConnection.getInstance();
 		Address address = null;
-		connection = checkConnection(connection);
 		try {
 			String req = "select idAddress from contact where id = ?";
 			ResultSet result;
-			try (PreparedStatement stmt = connection.prepareStatement(req)) {
+			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
 				stmt.setInt(1, id);
 				result = stmt.executeQuery();
 				while(result.next()){
@@ -174,16 +176,16 @@ public class DAOContact extends GlobalConnection{
 			sqle.printStackTrace();
 		}
 		finally {
-			closeConnection(connection);
+			GlobalConnection.closeConnection(connexion);
 		}
 		return address;
 	}
 
 	public String addAddress(int id, int idAddress) {
-		connection = checkConnection(connection);
+		connexion = GlobalConnection.getInstance();
 		try {
 			String req = "update contact set idAddress = ? where id = ?;";
-			try(PreparedStatement stmt = connection.prepareStatement(req)) {
+			try(PreparedStatement stmt = connexion.prepareStatement(req)) {
 				stmt.setInt(1, idAddress);
 				stmt.setInt(2, id);
 				stmt.executeUpdate();
@@ -193,23 +195,23 @@ public class DAOContact extends GlobalConnection{
 			return sqle.getMessage();
 		}
 		finally {
-			closeConnection(connection);
+			GlobalConnection.closeConnection(connexion);
 		}
 		
 	}
 	
 	public Map<Integer, String> getGroupes(int idContact) {
+		connexion = GlobalConnection.getInstance();
 		Map<Integer, String> lesGroupes = new HashMap<Integer, String>();
-		connection = checkConnection(connection);
 		try {
 			String req = "select idGroupe from contact_groupe where idContact = ?";
 			ResultSet result, groupeResult;
-			try (PreparedStatement stmt = connection.prepareStatement(req)) {
+			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
 				stmt.setInt(1, idContact);
 				result = stmt.executeQuery();
 				while(result.next()){
 					String sql = "select id, nom from groupe where id = ?";
-					try(PreparedStatement pstmt = connection.prepareStatement(sql)) {
+					try(PreparedStatement pstmt = connexion.prepareStatement(sql)) {
 						pstmt.setInt(1, result.getInt(1));
 						groupeResult = pstmt.executeQuery();
 						while(groupeResult.next()) {
@@ -223,7 +225,7 @@ public class DAOContact extends GlobalConnection{
 			sqle.printStackTrace();
 		}
 		finally {
-			closeConnection(connection);
+			GlobalConnection.closeConnection(connexion);
 		}
 		return !lesGroupes.isEmpty() ? lesGroupes : null;
 	}

@@ -9,7 +9,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionForm.global.LoginValidationForm;
-import domain.DAOContact;
 
 public class LoginAction extends Action{
 

@@ -8,12 +8,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import domain.DAOContact;
 import services.ContactService;
 import servletAction.AccueilAction;
 
 public class DeleteContactAction extends Action {
 
+	@Override
 	public ActionForward execute(final ActionMapping mapping,
 			ActionForm pForm, final HttpServletRequest request,
 			final HttpServletResponse pResponse) throws Exception {

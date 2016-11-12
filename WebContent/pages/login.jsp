@@ -6,14 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title><bean:message key="application.name"/></title>
 </head>
 <body>
-	<h1>Coucou</h1>
+	<h1><bean:message key="application.name"/></h1>
 	
 	<html:form method="post" action="/Login">
-		Nom : <input type = "text" name = "name">
-		Password : <input type = "password" name = "password">
+		<bean:message key="contact.nom"/> : <input type = "text" name = "name">
+		<bean:message key="login.password"/> : <input type = "password" name = "password">
 		
 		<input type ="submit">
 	</html:form>

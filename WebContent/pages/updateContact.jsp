@@ -50,15 +50,15 @@
 					<fieldset>
 						<h1 class="formName col-md-offset-4"><bean:message key = "maj.contact"/></h1>
 						<div class="form-group">
-							<label class="col-md-4 control-label">Prenom</label>
+							<label class="col-md-4 control-label"><bean:message key="contact.prenom"/></label>
 							<div class="col-md-8">
 								<html:text styleClass="form-control inputForm" property = "firstName" value = '<%= c.getFirstName() %>'/>
 							</div>
-							<label class="col-md-4 control-label">Nom</label>
+							<label class="col-md-4 control-label"><bean:message key="contact.nom"/></label>
 							<div class="col-md-8">
 								<html:text styleClass="form-control inputForm" property = "lastName" value = '<%= c.getLastName() %>'/>
 							</div>
-							<label class="col-md-4 control-label">Mail</label>
+							<label class="col-md-4 control-label"><bean:message key="contact.mail"/></label>
 							<div class="col-md-8">
 								<html:text styleClass="form-control inputForm" property = "email" value = '<%= c.getEmail() %>'/>
 							</div>
@@ -96,7 +96,7 @@
 							<html:select property="id" value="<%= addressId %>">
 							
 										<html:option value="0">
-											Sélectionner une adresse
+											<bean:message key="adresse.select"/>
 										</html:option>
 								<%
 									for(Address anAddress : addresses) {

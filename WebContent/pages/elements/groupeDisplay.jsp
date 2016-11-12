@@ -19,8 +19,8 @@
 		<table class = "table table-striped table-bordered">
 			<thead>
 				<tr>
-					<th>Nom du groupe</th>
-					<th>Nombre de membres</th>
+					<th><bean:message key="groupe.name"/></th>
+					<th><bean:message key="groupe.nombre"/></th>
 				</tr>
 			</thead>
 					<%

@@ -9,7 +9,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionForm.phoneNumber.AddPhoneNumberValidationForm;
-import domain.DAOPhoneNumber;
 import services.PhoneNumberService;
 
 public class AddPhoneNumberAction extends Action{

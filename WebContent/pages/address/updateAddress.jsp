@@ -21,8 +21,6 @@
 		} catch (NullPointerException npe) {
 			idAddress = Integer.valueOf(request.getParameter("idAddress"));
 		}
-		
-		request.getSession().setAttribute("idAddress", idAddress);
 		Address add = as.getAddress(idAddress);
 	%>
 	
@@ -54,6 +52,7 @@
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property="country" value ="<%= add.getCountry() %>"/>
 	                    </div>	
+	                    <html:hidden property = "id" value = '<%= request.getParameter("idAddress") %>' />
 	                    <div class="col-md-offset-7">
 	                        <html:submit styleClass="btn btn-primary validerForm" value="Valider" />
 	                    </div>

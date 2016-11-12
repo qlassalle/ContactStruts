@@ -111,7 +111,7 @@
 		
 		<action path = "/RemoveFromGroupe" type ="servletAction.groupe.RemoveFromGroupeAction">
 			<forward name = "success" path="/pages/updateContact.jsp"/>
-			<forward name = "erreur" path="/pages/erreur.jsp"/>		
+			<forward name = "erreur" path="/pages/error.jsp"/>		
 		</action>
 				
 		<!-- ****************** Address ****************** -->
@@ -124,8 +124,8 @@
 		</action>
 		
 		<action path = "/DeleteAddress" type ="servletAction.address.DeleteAddressAction">
-			<forward name = "success" path="/pages/updateContact.jsp"/>
-			<forward name = "erreur" path="/pages/erreur.jsp"/>		
+			<forward name = "success" path="/pages/main.jsp"/>
+			<forward name = "erreur" path="/pages/error.jsp"/>		
 		</action>
 		
 		<action path = "/SelectAddress" type = "servletAction.address.SelectAddressAction"
@@ -138,7 +138,7 @@
 		<action path = "/UpdateAddress" type = "servletAction.address.UpdateAddressAction"
 				name = "UpdateAddressValidationForm" scope ="request"
 				input = "/pages/address/updateAddress.jsp">
-				<forward name = "success" path = "/pages/address/updateAddress.jsp"/>
+				<forward name = "success" path = "/pages/main.jsp"/>
 				<forward name = "erreur" path = "/pages/error.jsp"/>
 		</action>
 				
@@ -153,7 +153,7 @@
 							
 		<action path = "/DeletePhoneNumber" type ="servletAction.phoneNumber.DeletePhoneNumberAction">
 			<forward name = "success" path="/pages/updateContact.jsp"/>
-			<forward name = "erreur" path="/pages/erreur.jsp"/>		
+			<forward name = "erreur" path="/pages/error.jsp"/>		
 		</action>			
 								
 		</action-mappings>

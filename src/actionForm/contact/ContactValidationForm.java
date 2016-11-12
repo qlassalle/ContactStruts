@@ -70,6 +70,7 @@ public abstract class ContactValidationForm extends ActionForm {
 		lastName = string;
 	}
 
+	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		this.firstName = null;
 		this.lastName = null;

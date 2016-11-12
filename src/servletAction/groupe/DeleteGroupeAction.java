@@ -8,7 +8,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import domain.DAOGroupe;
 import services.GroupeService;
 import servletAction.AccueilAction;
 

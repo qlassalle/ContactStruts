@@ -2,7 +2,6 @@ package servletAction.address;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
@@ -10,10 +9,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionForm.address.AddAddressValidationForm;
-import domain.DAOAddress;
-import domain.DAOContact;
 import services.AddressService;
-import services.ContactService;
 import servletAction.AccueilAction;
 
 public class AddAddressAction extends Action{
@@ -21,8 +17,6 @@ public class AddAddressAction extends Action{
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
-		HttpSession session = request.getSession();
 		
 		final AddAddressValidationForm lForm=(AddAddressValidationForm)form;
 		
@@ -35,6 +29,8 @@ public class AddAddressAction extends Action{
 		AddressService as = new AddressService();
 		final int idAddress = as.addAddress(street, city, zip, country);
 				
-		return idAddress != 0 ? mapping.findForward("success") : mapping.findForward("erreur");
+		final AccueilAction accueil = new AccueilAction();
+		
+		return idAddress != 0 ? accueil.execute(mapping, lForm, request, response) : mapping.findForward("erreur");
 	}
 }

@@ -1,5 +1,6 @@
 package domain;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,19 +9,21 @@ import java.util.List;
 
 import models.PhoneNumber;
 
-public class DAOPhoneNumber extends GlobalConnection{
+public class DAOPhoneNumber {
 
+	private static Connection connexion;
+	
 	public DAOPhoneNumber () {
-		super();
+		connexion = GlobalConnection.getInstance();
 	}
 	
 	public List<PhoneNumber> getPhoneNumbers(int idContact) {
+		connexion = GlobalConnection.getInstance();
 		List<PhoneNumber> numbers = new ArrayList<PhoneNumber>();
-		connection = checkConnection(connection);
 		ResultSet result = null;
 		try {
 			String req = "select * from phone where idContact = ?";
-			try(PreparedStatement stmt = connection.prepareStatement(req)) {
+			try(PreparedStatement stmt = connexion.prepareStatement(req)) {
 				stmt.setInt(1, idContact);
 				result = stmt.executeQuery();
 				while(result.next()) {
@@ -31,16 +34,16 @@ public class DAOPhoneNumber extends GlobalConnection{
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		} finally {
-			closeConnection(connection);
+			GlobalConnection.closeConnection(connexion);
 		}
 		return numbers;
 	}
 
 	public String save(String kind, String number, int idContact) {
-		connection = checkConnection(connection);
+		connexion = GlobalConnection.getInstance();
 		try {
 			String req = "insert into phone(kind, number, idContact) values(?, ?, ?)";
-			try (PreparedStatement stmt = connection.prepareStatement(req)) {
+			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
 				stmt.setString(1, kind);
 				stmt.setString(2, number);
 				stmt.setInt(3, idContact);
@@ -50,16 +53,16 @@ public class DAOPhoneNumber extends GlobalConnection{
 		} catch (SQLException sqle) {
 			return sqle.getMessage();
 		} finally {
-			closeConnection(connection);
+			GlobalConnection.closeConnection(connexion);
 		}
 	}
 
 	public String update(int id, String kind, String number) {
-		connection = checkConnection(connection);
+		connexion = GlobalConnection.getInstance();
 		int result = 0;
 		String req = "update PhoneNumber set id = ?, kind = ?, number = ? where id = ?";
 		try {
-			PreparedStatement stmt = connection.prepareStatement(req);
+			PreparedStatement stmt = connexion.prepareStatement(req);
 			stmt.setInt(1, id);
 			stmt.setString(2, kind);
 			stmt.setString(3, number);
@@ -71,15 +74,15 @@ public class DAOPhoneNumber extends GlobalConnection{
 			return e.getMessage();
 		}
 		finally {
-			closeConnection(connection);
+			GlobalConnection.closeConnection(connexion);
 		}
 	}
 
 	public String delete(int id){
-		connection = checkConnection(connection);
+		connexion = GlobalConnection.getInstance();
 		String req = "delete from phone where id = ?";
 		try{
-			try(PreparedStatement stmt = connection.prepareStatement(req)) {
+			try(PreparedStatement stmt = connexion.prepareStatement(req)) {
 				stmt.setInt(1, id);
 				stmt.executeUpdate();
 			}
@@ -87,7 +90,7 @@ public class DAOPhoneNumber extends GlobalConnection{
 			return sqle.getMessage();
 		}
 		finally {
-			closeConnection(connection);
+			GlobalConnection.closeConnection(connexion);
 		}
 		return null;
 	}

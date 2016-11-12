@@ -6,20 +6,20 @@ import java.sql.SQLException;
 
 public class GlobalConnection {
 	
-	private final String url = "jdbc:mysql://localhost:8889/contact";
 	private final String urlWindows = "jdbc:mysql://localhost:3306/contact";
 	private final String utilisateur = "root";
-	private final String motDePasse = "root";
 	private final String motDePasseWindows = "";
 	
 
-	Connection connection;
+	private static Connection connection;
 	
-	public GlobalConnection() {
-		connection = getConnection();
+	private static final GlobalConnection INSTANCE = new GlobalConnection();
+		
+	private GlobalConnection() {
+		connection = setConnection();
 	}
 
-	protected Connection getConnection() {
+	private Connection setConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
@@ -28,35 +28,28 @@ public class GlobalConnection {
 		}
 		Connection connexion = null;
 		try {
-			connexion = DriverManager.getConnection(url, utilisateur, motDePasse);
-		} catch (SQLException e) {
-			try {
-				connexion = DriverManager.getConnection(urlWindows, utilisateur, motDePasseWindows);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
+			connexion = DriverManager.getConnection(urlWindows, utilisateur, motDePasseWindows);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
 		}
 		return connexion;
 	}
-	
-	protected Connection checkConnection(Connection connection)
-	{
-		try {
-			if(connection.isClosed()) connection = getConnection();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
+		
+	public static Connection getInstance() {
+		if(connection == null) {
+			new GlobalConnection();
 		}
 		return connection;
 	}
 	
-	protected void closeConnection(Connection connection) {
+	public static void closeConnection(Connection connection) {
 		if(connection !=  null){
 			try {
 				connection.close();
+				GlobalConnection.connection = null;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}	
 		}
 	}
-	
 }

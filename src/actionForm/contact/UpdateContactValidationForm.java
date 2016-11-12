@@ -13,6 +13,7 @@ public class UpdateContactValidationForm extends ContactValidationForm {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		ActionErrors errors = new ActionErrors();
 

@@ -11,8 +11,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import domain.DAOContact;
-import domain.DAOGroupe;
 import models.Groupe;
 import services.AddressService;
 import services.ContactService;
@@ -37,6 +35,7 @@ public class AccueilAction extends Action{
 		request.setAttribute("nbMembre", nbMembre);
 		request.setAttribute("lesContacts", cs.getAllContacts());
 		request.setAttribute("lesAdresses", as.getAllAddresses());
+		
 		return mapping.findForward("success");
 	}	
 }

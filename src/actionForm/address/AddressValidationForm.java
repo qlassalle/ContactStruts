@@ -66,6 +66,7 @@ public abstract class AddressValidationForm extends ActionForm {
 		this.country = null;
 	}
 
+	@Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		ActionErrors errors = new ActionErrors();
 

@@ -20,8 +20,8 @@
 		<thead>
 			<tr>
 				<th><bean:message key="adresse.rue" /></th>
-				<th><bean:message key="adresse.zip" /></th>
 				<th><bean:message key="adresse.ville" /></th>
+				<th><bean:message key="adresse.zip" /></th>
 				<th><bean:message key="adresse.pays" /></th>
 			</tr>
 		</thead>
@@ -32,8 +32,8 @@
 		%>
 				<tr>
 					<td><%=address.getStreet()%></td>
-					<td><%=address.getZip()%></td>
 					<td><%=address.getCity()%></td>
+					<td><%=address.getZip()%></td>
 					<td><%=address.getCountry()%></td>
 					<td><html:link action="address/updateAddress.jsp">
 							<html:param name="idAddress"><%=address.getId()%></html:param>

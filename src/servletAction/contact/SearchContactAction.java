@@ -1,8 +1,6 @@
 package servletAction.contact;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,7 +10,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionForm.contact.SearchContactValidationForm;
-import domain.DAOContact;
 import models.Contact;
 import services.ContactService;
 
