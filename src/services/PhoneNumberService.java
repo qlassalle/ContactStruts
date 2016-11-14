@@ -28,4 +28,8 @@ public class PhoneNumberService {
 	public String delete(int id) {
 		return daop.delete(id);
 	}
+	
+	public PhoneNumber getPhoneNumber(int id) {
+		return daop.getPhoneNumber(id);
+	}
 }

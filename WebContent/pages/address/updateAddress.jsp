@@ -17,9 +17,12 @@
 		AddressService as = new AddressService();
 		int idAddress;
 		try {
-			idAddress = (int)request.getSession().getAttribute("idAddress");
-		} catch (NullPointerException npe) {
 			idAddress = Integer.valueOf(request.getParameter("idAddress"));
+			request.getSession().setAttribute("idAddress", idAddress);
+		} 
+		// nfe is raised if there's an error and id isn't present
+		catch (NumberFormatException nfe) {
+			idAddress = (int)request.getSession().getAttribute("idAddress");
 		}
 		Address add = as.getAddress(idAddress);
 	%>

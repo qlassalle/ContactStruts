@@ -16,7 +16,7 @@
 		<form-bean name="SelectAddressValidationForm" type="actionForm.address.SelectAddressValidationForm"/>	
 		<form-bean name="UpdateAddressValidationForm" type="actionForm.address.UpdateAddressValidationForm"/>			
 		<form-bean name="AddPhoneNumberValidationForm" type="actionForm.phoneNumber.AddPhoneNumberValidationForm"/>			
-	</form-beans>
+		<form-bean name="UpdatePhoneNumberValidationForm" type="actionForm.phoneNumber.UpdatePhoneNumberValidationForm"/>	</form-beans>
 	
 	<action-mappings>
 		
@@ -56,6 +56,7 @@
 		
 		<action path="/phoneNumber/createPhoneNumber" forward="/pages/phoneNumber/createPhoneNumber.jsp"/>
 		
+		<action path="/phoneNumber/updatePhoneNumber" forward="/pages/phoneNumber/updatePhoneNumber.jsp"/>	
 			
 		<!-- *************************** Contact Actions ************************** -->
 						
@@ -89,7 +90,7 @@
 		
 		<action path = "/AddGroupe" type = "servletAction.groupe.AddGroupeAction"
 				name = "AddGroupeValidationForm" scope = "request"
-				input = "/pages/groupes/createGroupe.jsp">
+				input = "/pages/groupe/createGroupe.jsp">
 			<forward name = "success" path = "/pages/main.jsp"/>
 			<forward name = "error" path = "/pages/error.jsp"/>
 		</action>
@@ -154,8 +155,15 @@
 		<action path = "/DeletePhoneNumber" type ="servletAction.phoneNumber.DeletePhoneNumberAction">
 			<forward name = "success" path="/pages/updateContact.jsp"/>
 			<forward name = "erreur" path="/pages/error.jsp"/>		
-		</action>			
-								
+		</action>
+		
+		<action path = "/UpdatePhoneNumber" type = "servletAction.phoneNumber.UpdatePhoneNumberAction"
+				name = "UpdatePhoneNumberValidationForm" scope = "request"
+				input = "/pages/phoneNumber/updatePhoneNumber.jsp">
+			<forward name = "success" path = "/pages/updateContact.jsp"/>
+			<forward name = "error" path = "/pages/error.jsp"/>
+		</action>
+										
 		</action-mappings>
 
 <!-- ========== Ressources de definitions de messages =========================== -->

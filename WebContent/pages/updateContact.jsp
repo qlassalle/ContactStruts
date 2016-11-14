@@ -47,6 +47,7 @@
 		<div class="row">
 			<div class="col-md-offset-2 col-md-6">
 				<html:form styleClass="form-horizontal" action="/UpdateContact" method ="post">
+					<html:errors/>
 					<fieldset>
 						<h1 class="formName col-md-offset-4"><bean:message key = "maj.contact"/></h1>
 						<div class="form-group">
@@ -58,7 +59,7 @@
 							<div class="col-md-8">
 								<html:text styleClass="form-control inputForm" property = "lastName" value = '<%= c.getLastName() %>'/>
 							</div>
-							<label class="col-md-4 control-label"><bean:message key="contact.mail"/></label>
+							<label class="col-md-4 control-label"><bean:message key="contact.email"/></label>
 							<div class="col-md-8">
 								<html:text styleClass="form-control inputForm" property = "email" value = '<%= c.getEmail() %>'/>
 							</div>
@@ -145,7 +146,7 @@
 				<tr>
 					<td><%= number.getKind() %></td>
 					<td><%= number.getNumber() %></td>
-					<td><html:link action="phoneNumber/updateNumber.jsp">
+					<td><html:link action="phoneNumber/updatePhoneNumber.jsp">
 							<html:param name="id"><%= number.getId() %></html:param>
 							<span class="glyphicon glyphicon-pencil"></span>
 						</html:link></td>

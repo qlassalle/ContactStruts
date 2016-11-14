@@ -24,7 +24,7 @@
 	                <h1 class="formName col-md-offset-4"><bean:message key="groupe.ajouter"/></h1>
 	                <div class="form-group">
 	
-	                    <label class="col-md-4 control-label">Nom</label>
+	                    <label class="col-md-4 control-label"><bean:message key ="groupe.name"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property = "name"/>
 	                    </div>
@@ -39,4 +39,3 @@
 	</div>
    </body>
    </html:html>
-

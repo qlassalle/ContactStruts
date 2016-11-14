@@ -16,25 +16,28 @@
 	<div class="row">
 		<div class="col-md-offset-2 col-md-6">
 			<html:form styleClass="form-horizontal" action ="/AddPhoneNumber" method ="post">
-			<html:errors/>
-	            <fieldset>
-	                <h1 class="formName col-md-offset-4"><bean:message key="add.phoneNumber"/></h1>
-	                <div class="form-group">
-	
-	                    <label class="col-md-4 control-label"><bean:message key="phoneNumber.kind"/></label>
-	                    <div class="col-md-8">
-	                        <html:text styleClass="form-control inputForm" property = "kind"/>
-	                    </div>
-	
-	                    <label class="col-md-4 control-label"><bean:message key="phoneNumber.number"/></label>
-	                    <div class="col-md-8">
-	                        <html:text styleClass="form-control inputForm" property ="number"/>
-	                    </div>
-	                    <div class="col-md-offset-7">
-	                        <html:submit styleClass="btn btn-primary validerForm" value="Valider" />
-	                    </div>
-	                </div>
-	            </fieldset>
+				<html:errors/>
+				<fieldset>
+					<h1 class="formName col-md-offset-4">
+						<bean:message key="add.phoneNumber" />
+					</h1>
+					<div class="form-group">
+
+						<label class="col-md-4 control-label"><bean:message key="phoneNumber.kind" /></label>
+						<div class="col-md-8">
+							<html:text styleClass="form-control inputForm" property="kind" />
+						</div>
+
+						<label class="col-md-4 control-label"><bean:message key="phoneNumber.number" /></label>
+						<div class="col-md-8">
+							<html:text styleClass="form-control inputForm" property="number" />
+						</div>
+						<div class="col-md-offset-7">
+							<html:submit styleClass="btn btn-primary validerForm"
+								value="Valider" />
+						</div>
+					</div>
+				</fieldset>
 			</html:form>
 		</div>
 	</div>

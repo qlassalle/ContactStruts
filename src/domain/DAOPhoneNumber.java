@@ -60,7 +60,7 @@ public class DAOPhoneNumber {
 	public String update(int id, String kind, String number) {
 		connexion = GlobalConnection.getInstance();
 		int result = 0;
-		String req = "update PhoneNumber set id = ?, kind = ?, number = ? where id = ?";
+		String req = "update phone set id = ?, kind = ?, number = ? where id = ?";
 		try {
 			PreparedStatement stmt = connexion.prepareStatement(req);
 			stmt.setInt(1, id);
@@ -93,5 +93,27 @@ public class DAOPhoneNumber {
 			GlobalConnection.closeConnection(connexion);
 		}
 		return null;
+	}
+
+	public PhoneNumber getPhoneNumber(int id) {
+		connexion = GlobalConnection.getInstance();
+		PhoneNumber phoneNumber = null;
+		String req = "select * from phone where id = ?";
+		try {
+			try(PreparedStatement pstmt = connexion.prepareStatement(req)) {
+				pstmt.setInt(1, id);
+				ResultSet result = pstmt.executeQuery();
+				while(result.next()) {
+					phoneNumber = new PhoneNumber(result.getInt(1),
+							result.getString(2), result.getString(3), 
+							result.getInt(4));
+				}
+			}
+		} catch(SQLException sqle) {
+			sqle.printStackTrace();
+		} finally{
+			GlobalConnection.closeConnection(connexion);
+		}
+		return phoneNumber;
 	}
 }

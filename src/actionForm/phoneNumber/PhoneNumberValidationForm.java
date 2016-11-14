@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
-public class PhoneNumberValidationForm extends ActionForm{
+public abstract class PhoneNumberValidationForm extends ActionForm{
 
 	/**
 	 * 

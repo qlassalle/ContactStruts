@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionMapping;
 
 import actionForm.contact.UpdateContactValidationForm;
 import domain.DAOContact;
+import services.ContactService;
 import servletAction.AccueilAction;
 
 public class UpdateContactAction extends Action {
@@ -25,8 +26,8 @@ public class UpdateContactAction extends Action {
 		final String lastName = uForm.getLastName();
 		final String email = uForm.getEmail();
 		
-		final DAOContact daoc = new DAOContact();
-		final String error = daoc.update(id, lastName, firstName, email);
+		final ContactService cs = new ContactService();
+		final String error = cs.update(id, lastName, firstName, email);
 		
 		final AccueilAction accueil = new AccueilAction();
 

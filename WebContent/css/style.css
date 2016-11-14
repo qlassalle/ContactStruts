@@ -57,3 +57,7 @@ label
 	text-align: center;
 	margin-top: 50px;
 }
+
+.centeredText {
+	text-align: center!important;;
+}
