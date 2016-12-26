@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class GlobalConnection {
 	
-	private final String urlWindows = "jdbc:mysql://localhost:3306/contact";
+	private final String urlWindows = "jdbc:mysql://localhost:8889/contact";
 	private final String utilisateur = "root";
-	private final String motDePasseWindows = "";
+	private final String motDePasseWindows = "root";
 	
 
 	private static Connection connection;

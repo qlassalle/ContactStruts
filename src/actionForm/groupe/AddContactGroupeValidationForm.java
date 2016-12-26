@@ -25,11 +25,12 @@ public class AddContactGroupeValidationForm extends GroupeValidationForm {
 
 	@Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-		ActionErrors errors = new ActionErrors();
+		/** ActionErrors errors = new ActionErrors();
 		if(getIds() == null || getIds().length < 1) {
 			errors.add("id", new ActionMessage("ajout.contact_groupe.error.required"));
-		}
-		return errors;
+		} */
+		// nothing to check here, a group can be empty 
+		return null;
 	}
 
 	@Override

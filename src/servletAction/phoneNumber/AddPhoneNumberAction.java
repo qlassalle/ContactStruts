@@ -29,7 +29,4 @@ public class AddPhoneNumberAction extends Action{
 		return error == null ? mapping.findForward("success") : mapping.findForward("error");
 		
 	}
-
-	
-	
 }

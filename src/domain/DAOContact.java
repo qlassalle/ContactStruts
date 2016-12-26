@@ -80,8 +80,8 @@ public class DAOContact {
 		return null;
 	}
 
-	public List<Contact> getContactByFirstName(String firstName) {
-		return getContact(firstName);
+	public List<Contact> getContactByFirstName(String lastName) {
+		return getContact(lastName);
 	}
 
 	public List<Contact> getAllContacts() {
@@ -109,7 +109,7 @@ public class DAOContact {
 		return lesContacts;
 	}
 
-	public List<Contact> getContact(String firstName) {
+	public List<Contact> getContact(String lastName) {
 		connexion = GlobalConnection.getInstance();
 		List<Contact> lesContacts = new ArrayList<Contact>();
 		Contact c = null;
@@ -117,7 +117,7 @@ public class DAOContact {
 			String req = "select * from contact where nom like ?";
 			ResultSet result;
 			try (PreparedStatement stmt = connexion.prepareStatement(req)) {
-				stmt.setString(1, "%" + firstName + "%");
+				stmt.setString(1, "%" + lastName + "%");
 				result = stmt.executeQuery();
 				while (result.next()) {
 					c = new Contact(result.getInt(1), result.getString(2), result.getString(3), result.getString(4));

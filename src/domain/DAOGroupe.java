@@ -78,6 +78,8 @@ public class DAOGroupe {
 
 	public void AddContact(int id, String[] ids) {
 		deleteAllContacts(id);
+		// the user wants to remove all the users from the group
+		if(ids == null) return;
 		connexion = GlobalConnection.getInstance();
 		Statement stmt;
 		String req;
@@ -105,7 +107,6 @@ public class DAOGroupe {
 			try(Statement stmt = connexion.createStatement()) {
 				result = stmt.executeQuery("select * from contact_groupe where idGroupe = " + idGroupe);
 				while(result.next()) {
-					System.out.println(result.getInt("idContact"));
 					lesContacts.add(daoc.getContactById(result.getInt("idContact")));
 				}
 			} finally {

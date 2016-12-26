@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionMapping;
 import actionForm.contact.SearchContactValidationForm;
 import models.Contact;
 import services.ContactService;
+import servletAction.AccueilAction;
 
 public class SearchContactAction extends Action{
 
@@ -25,10 +26,18 @@ public class SearchContactAction extends Action{
 		
 		final ContactService cs = new ContactService();
 				
-		// TODO manage doublons
-		ArrayList<Contact> c = (ArrayList<Contact>)cs.getContactByFirstName(firstName);
-		request.getSession().setAttribute("contactId", c.get(0).getIdContact());
+		// TODO manage duplications
+		ArrayList<Contact> searchedContacts = (ArrayList<Contact>)cs.getContactByFirstName(firstName);
 		
-		return !c.isEmpty() ? mapping.findForward("success") : mapping.findForward("erreur");
+		request.setAttribute("pattern", firstName);
+		if(searchedContacts.size() == 1) {
+			request.getSession().setAttribute("contactId", searchedContacts.get(0).getIdContact());
+			return mapping.findForward("oneContact");
+		} else {
+			request.setAttribute("lesContacts", searchedContacts);
+			return mapping.findForward("manyContacts");
+		}
+		
+		// return !c.isEmpty() ? mapping.findForward("success") : mapping.findForward("erreur");
 	}	
 }

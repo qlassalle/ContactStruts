@@ -27,8 +27,8 @@ public class ContactService {
 		return daoc.delete(id);
 	}
 	
-	public List<Contact> getContactByFirstName(String firstName) {
-		return daoc.getContactByFirstName(firstName);
+	public List<Contact> getContactByFirstName(String lastName) {
+		return daoc.getContactByFirstName(lastName);
 	}
 	
 	public List<Contact> getAllContacts() {

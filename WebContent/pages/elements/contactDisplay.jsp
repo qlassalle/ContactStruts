@@ -6,10 +6,17 @@
 <%@page import="models.Contact" %>
 
 	<div class="row">
-		<div class="col-md-offset-4 col-md-4">
-			<h1><bean:message key ="main.listContact"/></h1>
+		<div class="col-md-offset-4 col-md-5">
+			<h1>			
+				<% if(request.getAttribute("pattern") != null) {
+					%> <bean:message key ="main.searchedContact"/> <%= request.getAttribute("pattern") %>
+				<% } else {
+					%> <bean:message key ="main.listContact"/> <%
+				}
+				%>
+			</h1>
 		</div>
-		<div class="col-md-offset-3 col-md-1 add-btn">
+		<div class="col-md-offset-2 col-md-1 add-btn">
 			<h1>
 				<html:link action="createContact.jsp"><message:bean key="add.contact"/>
 				<span class = "glyphicon glyphicon-plus-sign"></html:link></span>

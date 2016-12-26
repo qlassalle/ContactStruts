@@ -18,12 +18,11 @@
    <html:base/>
 
    </head>
-
+   
    <body bgcolor="white">
 	
 	<% 
 		ArrayList<Contact> lesContacts = (ArrayList<Contact>)request.getAttribute("lesContacts");
-		ArrayList<Contact> lesMembres = (ArrayList<Contact>)request.getAttribute("lesMembres");
 	%>
 		<div class="row">
 			<div class="col-md-offset-4 col-md-6 ajoutContactGroupe">
@@ -39,7 +38,9 @@
 										String id = String.valueOf(c.getIdContact());
 								%> 
 										<div class="contactCheckbox">
-											<html:multibox styleClass = "contactCheckbox" property ="ids" value ="<%= id %>"/><%= c.getFirstName() + " " + c.getLastName() %>
+											<html:multibox styleClass = "contactCheckbox" property ="ids" 
+															value ="<%= id %>"/>
+												<%= c.getFirstName() + " " + c.getLastName() %>
 											<br>
 										</div>
 								<%

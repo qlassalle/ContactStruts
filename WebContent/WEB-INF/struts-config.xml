@@ -82,8 +82,8 @@
 		<action path = "/SearchContact" type ="servletAction.contact.SearchContactAction"
 				name = "SearchContactValidationForm" scope = "request"
 				input = "/pages/main.jsp">
-			<forward name = "success" path="/pages/updateContact.jsp"/>
-			<forward name = "erreur" path="/pages/main.jsp"/>
+			<forward name = "oneContact" path="/pages/updateContact.jsp"/>
+			<forward name = "manyContacts" path="/pages/searchedContacts.jsp"/>
 		</action>
 				
 		<!-- ****************** GROUPE ***************** -->			

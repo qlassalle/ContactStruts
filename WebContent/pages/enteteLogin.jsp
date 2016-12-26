@@ -16,11 +16,9 @@
 <body>
 
 <nav class="navbar navbar-default">
-
 	<div class="row">
 		<div style="text-align:center;">
 			<h1><bean:message key = "application.name"/></h1>
 		</div>
 	</div>
-
 </nav>
