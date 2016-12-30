@@ -24,33 +24,40 @@
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property = "street"/>
 	                    </div>
-	                    <div class="error">
+	                    <div class="col-md-offset-2 error">
 	                    	<html:errors property="street"/>
+	                    	<br>
+	                    	<html:errors property="incorrect street"/>
 	                    </div>
 	
 	                    <label class="col-md-4 control-label"><bean:message key="adresse.ville"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property ="city"/>
 	                    </div>
-	                    <div class="error">
+	                    <div class="col-md-offset-2 error">
 	                    	<html:errors property="city"/>
+	                    	<br>
+	                    	<html:errors property="incorrect city"/>
 	                    </div>
-	
 	
 	                    <label class="col-md-4 control-label"><bean:message key="adresse.zip"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property="zip"/>
 	                    </div>
-	                    <div class="error">
+	                    <div class="col-md-offset-2 error">
 	                    	<html:errors property="zip"/>
+	                    	<br>
+	                    	<html:errors property="incorrect zip"/>
 	                    </div>
 	                    
 	                    <label class="col-md-4 control-label"><bean:message key="adresse.pays"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property="country"/>
 	                    </div>	
-	                    <div class="error">
+	                    <div class="col-md-offset-2 error">
 	                    	<html:errors property="country"/>
+	                    	<br>
+	                    	<html:errors property="incorrect country"/>
 	                    </div>
 	                    
 	                    <div class="col-md-offset-7">

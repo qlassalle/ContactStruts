@@ -1,15 +1,15 @@
 # ContactStruts
 
 # TODO
-- manage errors
-- check email address format --> find a regex on the internet. Look for a regex generator software
 - change all SQL requests not using binding
-- manage duplicates entries
 
 # Done
 - research for many contacts
 - a group can now be empty
 - kind for phone numbers has been changed, up to 20 now
+- manage duplicates entries
+- check email address format --> find a regex on the internet. Look for a regex generator software
+- manage errors
 
 # Cheminement présentation
 

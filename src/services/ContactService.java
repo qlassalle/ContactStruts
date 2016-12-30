@@ -17,7 +17,7 @@ public class ContactService {
 	}
 
 	public String addContact(String nom, String prenom, String email) {
-		return daoc.save(nom, prenom, email);
+		return daoc.save(nom, prenom, email); 
 	}
 	
 	public String update(int id, String nom, String prenom, String email) {

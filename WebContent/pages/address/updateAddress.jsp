@@ -30,7 +30,6 @@
 	<div class="row">
 		<div class="col-md-offset-2 col-md-6">
 			<html:form styleClass="form-horizontal" action ="/UpdateAddress" method ="post">
-			<html:errors/>
 	            <fieldset>
 	                <h1 class="formName col-md-offset-4"><bean:message key="maj.address"/></h1>
 	                <div class="form-group">
@@ -39,22 +38,42 @@
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property = "street" value ="<%= add.getStreet() %>"/>
 	                    </div>
+	                    <div class="col-md-offset-2 error">
+	                    	<html:errors property="street"/>
+	                    	<br>
+	                    	<html:errors property="incorrect street"/>
+	                    </div>
 	
 	                    <label class="col-md-4 control-label"><bean:message key="adresse.ville"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property ="city" value ="<%= add.getCity() %>"/>
 	                    </div>
-	
+	                    <div class="col-md-offset-2 error">
+	                    	<html:errors property="city"/>
+	                    	<br>
+	                    	<html:errors property="incorrect city"/>
+	                    </div>
 	
 	                    <label class="col-md-4 control-label"><bean:message key="adresse.zip"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property="zip" value ="<%= add.getZip() %>"/>
+	                    </div>
+	                    <div class="col-md-offset-2 error">
+	                    	<html:errors property="zip"/>
+	                    	<br>
+	                    	<html:errors property="incorrect zip"/>
 	                    </div>
 	                    
 	                    <label class="col-md-4 control-label"><bean:message key="adresse.pays"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property="country" value ="<%= add.getCountry() %>"/>
 	                    </div>	
+	                    <div class="col-md-offset-2 error">
+	                    	<html:errors property="country"/>
+	                    	<br>
+	                    	<html:errors property="incorrect country"/>
+	                    </div>
+	                    
 	                    <html:hidden property = "id" value = '<%= request.getParameter("idAddress") %>' />
 	                    <div class="col-md-offset-7">
 	                        <html:submit styleClass="btn btn-primary validerForm" value="Valider" />

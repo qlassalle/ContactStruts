@@ -9,7 +9,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import actionForm.contact.UpdateContactValidationForm;
-import domain.DAOContact;
 import services.ContactService;
 import servletAction.AccueilAction;
 

@@ -15,20 +15,7 @@ public class UpdateContactValidationForm extends ContactValidationForm {
 
 	@Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-		ActionErrors errors = new ActionErrors();
-
-		int id = (int)request.getSession().getAttribute("contactId");
-		
-		if (getFirstName() == null || getFirstName().length() < 1) {
-			errors.add("first name", new ActionMessage("creation.fn.error.required"));
-		}
-		if (getLastName() == null || getLastName().length() < 1) {
-			errors.add("last name", new ActionMessage("creation.ln.error.required"));
-		}
-		if (getEmail() == null || getEmail().length() < 1) {
-			errors.add("email", new ActionMessage("creation.email.error.required"));
-		}
-		return errors;
+		return super.validate(mapping, request);
 	}
 
 }

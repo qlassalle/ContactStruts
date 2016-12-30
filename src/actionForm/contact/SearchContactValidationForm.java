@@ -8,6 +8,11 @@ import org.apache.struts.action.ActionMessage;
 
 public class SearchContactValidationForm extends ContactValidationForm{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
  
@@ -18,6 +23,4 @@ public class SearchContactValidationForm extends ContactValidationForm{
 			 
 		return errors;
 	}
-
-	
 }

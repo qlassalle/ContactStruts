@@ -16,17 +16,6 @@ public class AddPhoneNumberValidationForm extends PhoneNumberValidationForm {
 	@Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 		
-		ActionErrors errors = new ActionErrors();
-		
-		if(getKind() == null || getKind().length() < 1) {
-			errors.add("kind", new ActionMessage("creation.kind.error.required"));
-		}
-		if(getKind().length() > 20) {
-			errors.add("kind", new ActionMessage("creation.kind.error.too_long"));
-		}
-		if(getNumber() == null || getNumber().length() < 4 || getNumber().length() > 10) {
-			errors.add("number", new ActionMessage("creation.number.error.required"));
-		}		
-		return errors;
+		return super.validate(mapping, request);
 	}	
 }

@@ -2,8 +2,12 @@ package actionForm.contact;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
+import actionForm.global.RegexValidator;
 
 public abstract class ContactValidationForm extends ActionForm {
 
@@ -75,5 +79,30 @@ public abstract class ContactValidationForm extends ActionForm {
 		this.firstName = null;
 		this.lastName = null;
 		this.email = null;
+	}
+	
+	@Override
+	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
+		ActionErrors errors = new ActionErrors();
+
+		if (getFirstName() == null || getFirstName().length() < 1) {
+			errors.add("first name", new ActionMessage("creation.fn.error.required"));
+		}
+		if (!RegexValidator.isCorrectString(getFirstName())) {
+			errors.add("incorrect first name", new ActionMessage("creation.fn.error.incorrect"));
+		}
+		if (getLastName() == null || getLastName().length() < 1) {
+			errors.add("last name", new ActionMessage("creation.ln.error.required"));
+		}
+		if (!RegexValidator.isCorrectString(getLastName())) {
+			errors.add("incorrect last name", new ActionMessage("creation.ln.error.incorrect"));
+		}
+		if (getEmail() == null || getEmail().length() < 1) {
+			errors.add("email", new ActionMessage("creation.email.error.required"));
+		}
+		if (!RegexValidator.isMailCorrect(getEmail())) {
+			errors.add("incorrect email", new ActionMessage("creation.email.error.incorrect"));
+		}
+		return errors;
 	}
 }

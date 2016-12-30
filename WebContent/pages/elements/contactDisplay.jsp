@@ -9,7 +9,7 @@
 		<div class="col-md-offset-4 col-md-5">
 			<h1>			
 				<% if(request.getAttribute("pattern") != null) {
-					%> <bean:message key ="main.searchedContact"/> <%= request.getAttribute("pattern") %>
+					%> <bean:message key ="main.searchedContact"/> "<%= request.getAttribute("pattern") %>"
 				<% } else {
 					%> <bean:message key ="main.listContact"/> <%
 				}
@@ -18,7 +18,7 @@
 		</div>
 		<div class="col-md-offset-2 col-md-1 add-btn">
 			<h1>
-				<html:link action="createContact.jsp"><message:bean key="add.contact"/>
+				<html:link action="contact/createContact.jsp"><message:bean key="add.contact"/>
 				<span class = "glyphicon glyphicon-plus-sign"></html:link></span>
 			</h1>
 		</div>

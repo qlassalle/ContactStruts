@@ -18,15 +18,6 @@
 		<form-bean name="AddPhoneNumberValidationForm" type="actionForm.phoneNumber.AddPhoneNumberValidationForm"/>			
 		<form-bean name="UpdatePhoneNumberValidationForm" type="actionForm.phoneNumber.UpdatePhoneNumberValidationForm"/>	
 	</form-beans>
-
-	<global-exceptions>
-
-		<exception 
-				key="contact.already.exists"
-				handler="exceptions.ContactAlreadyExistsException"
-				type="com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException"
-			/>
-	</global-exceptions>
 	
 	<action-mappings>
 		
@@ -74,17 +65,29 @@
 					type="servletAction.contact.AddContactAction"
 					name="AddContactValidationForm" scope="request"
 					input="/pages/contact/createContact.jsp">	
+
+				<exception
+					type="exceptions.ContactAlreadyExistsException" 
+					key="contact.already.exists"
+					path="/pages/contact/createContact.jsp"
+				/>
 				
 				<forward name="success" path="/pages/elements/main.jsp" />
-				<forward name="error" path="/pages/error.jsp" />
 				<forward name="contactAlreadyExists" path="/pages/contact/createContact.jsp" />
 		</action>
 		
 		<action path = "/UpdateContact" type = "servletAction.contact.UpdateContactAction"
 					name = "UpdateContactValidationForm" scope ="request"
 					input = "/pages/contact/updateContact.jsp">
+
+				<exception
+					type="exceptions.ContactAlreadyExistsException" 
+					key="contact.already.exists"
+					path="/pages/contact/createContact.jsp"
+				/>
+				
 				<forward name = "success" path = "/pages/contact/updateContact.jsp"/>
-				<forward name = "error" path = "/pages/error.jsp"/>
+				<forward name = "contactAlreadyExists" path="/pages/contact/updateContact.jsp" />
 		</action>
 		
 		<action path = "/DeleteContact" type ="servletAction.contact.DeleteContactAction">

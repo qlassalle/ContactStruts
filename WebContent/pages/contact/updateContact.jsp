@@ -48,28 +48,46 @@
 		<div class="row">
 			<div class="col-md-offset-2 col-md-6">
 				<html:form styleClass="form-horizontal" action="/UpdateContact" method ="post">
-					<html:errors/>
 					<fieldset>
 						<h1 class="formName col-md-offset-4"><bean:message key = "maj.contact"/></h1>
-						<div class="form-group">
-							<label class="col-md-4 control-label"><bean:message key="contact.prenom"/></label>
-							<div class="col-md-8">
-								<html:text styleClass="form-control inputForm" property = "firstName" value = '<%= c.getFirstName() %>'/>
-							</div>
-							<label class="col-md-4 control-label"><bean:message key="contact.nom"/></label>
-							<div class="col-md-8">
-								<html:text styleClass="form-control inputForm" property = "lastName" value = '<%= c.getLastName() %>'/>
-							</div>
-							<label class="col-md-4 control-label"><bean:message key="contact.email"/></label>
-							<div class="col-md-8">
-								<html:text styleClass="form-control inputForm" property = "email" value = '<%= c.getEmail() %>'/>
-							</div>
-		
-							<div class="col-md-offset-7">
-								<html:submit styleClass="btn btn-primary validerForm" value="Valider" />
-							</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label"><bean:message
+								key="contact.prenom" /></label>
+						<div class="col-md-8">
+							<html:text styleClass="form-control inputForm" property="firstName" value='<%=c.getFirstName()%>' />
 						</div>
-					</fieldset>
+						<div class="col-md-offset-2 error">
+							<html:errors property="first name" />
+							<br>
+							<html:errors property="incorrect first name" />
+						</div>
+						<label class="col-md-4 control-label"><bean:message
+								key="contact.nom" /></label>
+						<div class="col-md-8">
+							<html:text styleClass="form-control inputForm" property="lastName" value='<%=c.getLastName()%>' />
+						</div>
+						<div class="col-md-offset-2 error">
+							<html:errors property="last name" />
+							<br>
+							<html:errors property="incorrect last name" />
+						</div>
+						<label class="col-md-4 control-label"><bean:message
+								key="contact.email" /></label>
+						<div class="col-md-8">
+							<html:text styleClass="form-control inputForm" property="email"	value='<%=c.getEmail()%>' />
+						</div>
+						<div class="col-md-offset-2 error">
+							<html:errors property="email" />
+							<html:errors property="incorrect email" />
+							<html:errors property="contact.already.exists" />
+						</div>
+
+						<div class="col-md-offset-7">
+							<html:submit styleClass="btn btn-primary validerForm"
+								value="Valider" />
+						</div>
+					</div>
+				</fieldset>
 				</html:form>
 			</div>
 		</div>

@@ -6,6 +6,7 @@
 		<title><bean:message key="title.error"/></title>
 	</head>
 	<body>
+	Erreur à gérer !!
 		<html:errors/><br/> 
 	</body>
 </html:html>

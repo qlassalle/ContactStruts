@@ -10,20 +10,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import exceptions.ContactAlreadyExistsException;
 import models.Address;
 import models.Contact;
 
 public class DAOContact {
 
 	private static Connection connexion;
+	private static final String MAIL_ERROR = "contactAlreadyExists";
 	
 	public DAOContact() {
 		connexion = GlobalConnection.getInstance();
 	}
 
 	public String save(String nom, String prenom, String email) {
-		// throw new ContactAlreadyExistsException();
+		// check if a user doesn't already exist with this email
+		if(emailExists(email)) return MAIL_ERROR;
 		connexion = GlobalConnection.getInstance();
 		Statement stmt;
 		try {
@@ -44,7 +45,6 @@ public class DAOContact {
 
 	public String update(int id, String nom, String prenom, String email) {
 		connexion = GlobalConnection.getInstance();
-		int result = 0;
 		String req = "update contact set id = ?, nom = ?, prenom = ?, email = ? where id = ?";
 		try {
 			PreparedStatement stmt = connexion.prepareStatement(req);
@@ -53,7 +53,7 @@ public class DAOContact {
 			stmt.setString(3, prenom);
 			stmt.setString(4, email);
 			stmt.setInt(5, id);
-			result = stmt.executeUpdate();
+			stmt.executeUpdate();
 			stmt.close();
 			return null;
 		} catch (SQLException e) {
@@ -231,5 +231,26 @@ public class DAOContact {
 			GlobalConnection.closeConnection(connexion);
 		}
 		return !lesGroupes.isEmpty() ? lesGroupes : null;
+	}
+	
+	private boolean emailExists(String email) {
+		connexion = GlobalConnection.getInstance();
+		try {
+			String req = "select * from contact where email = ?";
+			ResultSet result;
+			try(PreparedStatement pstmt = connexion.prepareStatement(req)){
+				pstmt.setString(1, email);
+				result = pstmt.executeQuery();
+				if(result.next()) {
+					return true;
+				}
+			}
+		} catch(SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		finally {
+			GlobalConnection.closeConnection(connexion);
+		}
+		return false;
 	}
 }
