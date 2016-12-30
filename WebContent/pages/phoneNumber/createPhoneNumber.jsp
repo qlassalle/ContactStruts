@@ -2,7 +2,7 @@
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
 <%@ taglib prefix="nested" uri="http://struts.apache.org/tags-nested" %>
-<jsp:include page="../entete.jsp"></jsp:include>
+<jsp:include page="../elements/entete.jsp"></jsp:include>
 
 
 	<html:html>

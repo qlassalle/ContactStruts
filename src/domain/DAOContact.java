@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import exceptions.ContactAlreadyExistsException;
 import models.Address;
 import models.Contact;
 
@@ -22,6 +23,7 @@ public class DAOContact {
 	}
 
 	public String save(String nom, String prenom, String email) {
+		// throw new ContactAlreadyExistsException();
 		connexion = GlobalConnection.getInstance();
 		Statement stmt;
 		try {
@@ -32,6 +34,7 @@ public class DAOContact {
 			return null;
 
 		} catch (SQLException e) {
+			e.printStackTrace();
 			return e.getMessage();
 		}
 		finally {

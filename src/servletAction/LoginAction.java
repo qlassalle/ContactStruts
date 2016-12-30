@@ -11,8 +11,6 @@ import org.apache.struts.action.ActionMapping;
 import actionForm.global.LoginValidationForm;
 
 public class LoginAction extends Action{
-
-	String monTest = "mon test";
 	
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,

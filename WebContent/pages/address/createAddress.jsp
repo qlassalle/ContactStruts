@@ -2,7 +2,7 @@
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
 <%@ taglib prefix="nested" uri="http://struts.apache.org/tags-nested" %>
-<jsp:include page="../entete.jsp"></jsp:include>
+<jsp:include page="../elements/entete.jsp"></jsp:include>
 
 
 	<html:html>
@@ -16,7 +16,6 @@
 	<div class="row">
 		<div class="col-md-offset-2 col-md-6">
 			<html:form styleClass="form-horizontal" action ="/AddAddress" method ="post">
-			<html:errors/>
 	            <fieldset>
 	                <h1 class="formName col-md-offset-4"><bean:message key="add.address"/></h1>
 	                <div class="form-group">
@@ -25,10 +24,16 @@
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property = "street"/>
 	                    </div>
+	                    <div class="error">
+	                    	<html:errors property="street"/>
+	                    </div>
 	
 	                    <label class="col-md-4 control-label"><bean:message key="adresse.ville"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property ="city"/>
+	                    </div>
+	                    <div class="error">
+	                    	<html:errors property="city"/>
 	                    </div>
 	
 	
@@ -36,11 +41,18 @@
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property="zip"/>
 	                    </div>
+	                    <div class="error">
+	                    	<html:errors property="zip"/>
+	                    </div>
 	                    
 	                    <label class="col-md-4 control-label"><bean:message key="adresse.pays"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property="country"/>
 	                    </div>	
+	                    <div class="error">
+	                    	<html:errors property="country"/>
+	                    </div>
+	                    
 	                    <div class="col-md-offset-7">
 	                        <html:submit styleClass="btn btn-primary validerForm" value="Valider" />
 	                    </div>

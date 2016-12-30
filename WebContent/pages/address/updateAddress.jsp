@@ -7,7 +7,7 @@
 <%@page import="services.AddressService"%>
 <%@page import="models.Address"%>
 
-<jsp:include page="../entete.jsp"></jsp:include>
+<jsp:include page="../elements/entete.jsp"></jsp:include>
 <head>
 	<title><bean:message key="maj.address.title" /></title>
 </head>

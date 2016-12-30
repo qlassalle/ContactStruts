@@ -2,7 +2,7 @@
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
 <%@ taglib prefix="nested" uri="http://struts.apache.org/tags-nested" %>
-<jsp:include page="entete.jsp"></jsp:include>
+<jsp:include page="../elements/entete.jsp"></jsp:include>
   
    <html:html>
 
@@ -18,26 +18,36 @@
 
 	<div class="row">
 		<div class="col-md-offset-2 col-md-6">
+		
 			<html:form styleClass="form-horizontal" action ="/AddContact" method ="post">
-			<html:errors/>
 	            <fieldset>
 	                <h1 class="formName col-md-offset-4"><bean:message key="add.contact"/></h1>
 	                <div class="form-group">
+	
+	<html:errors/>
 	
 		                <label class="col-md-4 control-label"><bean:message key="contact.prenom"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property ="firstName"/>
 	                    </div>
-	                    
+	                    <div class="error">
+	                    	<html:errors property="first name"/>
+	                    </div>
+	                    	                    
 	                    <label class="col-md-4 control-label"><bean:message key="contact.nom"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property = "lastName"/>
 	                    </div>
-	
+	                    <div class="error">
+	                    	<html:errors property="last name"/>
+	                    </div>
 	
 	                    <label class="col-md-4 control-label"><bean:message key="contact.email"/></label>
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property="email"/>
+	                    </div>
+	                    <div class="error">
+	                    	<html:errors property="email"/>
 	                    </div>
 	
 	                    <div class="col-md-offset-7">

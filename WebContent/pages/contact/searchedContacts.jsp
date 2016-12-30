@@ -4,10 +4,10 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<jsp:include page="entete.jsp"></jsp:include>
+		<jsp:include page="../elements/entete.jsp"></jsp:include>
 		<title><bean:message key="title.searchedContact"/></title>
 	</head>
 	<body>
-		<jsp:include page="elements/contactDisplay.jsp"></jsp:include>
+		<jsp:include page="../elements/contactDisplay.jsp"></jsp:include>
 	</body>
 </html>

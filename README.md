@@ -3,6 +3,8 @@
 # TODO
 - manage errors
 - check email address format --> find a regex on the internet. Look for a regex generator software
+- change all SQL requests not using binding
+- manage duplicates entries
 
 # Done
 - research for many contacts

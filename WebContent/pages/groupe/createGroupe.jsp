@@ -2,7 +2,7 @@
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html" %>
 <%@ taglib prefix="bean" uri="http://struts.apache.org/tags-bean" %>
 <%@ taglib prefix="nested" uri="http://struts.apache.org/tags-nested" %>
-<jsp:include page="../entete.jsp"></jsp:include>
+<jsp:include page="../elements/entete.jsp"></jsp:include>
   
    <html:html>
 
@@ -19,7 +19,6 @@
 	<div class="row">
 		<div class="col-md-offset-2 col-md-6">
 			<html:form styleClass="form-horizontal" action ="/AddGroupe" method ="post">
-			<html:errors/>
 	            <fieldset>
 	                <h1 class="formName col-md-offset-4"><bean:message key="groupe.ajouter"/></h1>
 	                <div class="form-group">
@@ -28,6 +27,10 @@
 	                    <div class="col-md-8">
 	                        <html:text styleClass="form-control inputForm" property = "name"/>
 	                    </div>
+	                    
+	                    <div class="error">
+							<html:errors/>
+						</div>
 	
 	                    <div class="col-md-offset-7">
 	                        <html:submit styleClass="btn btn-primary validerForm" value="Valider" />

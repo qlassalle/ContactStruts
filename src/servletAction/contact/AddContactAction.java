@@ -4,9 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
 import actionForm.contact.AddContactValidationForm;
 import services.ContactService;
 import servletAction.AccueilAction;
@@ -18,7 +21,6 @@ public class AddContactAction extends Action {
 			ActionForm pForm, final HttpServletRequest pRequest,
 			final HttpServletResponse pResponse) throws Exception 
 	{
-		
 		final AddContactValidationForm lForm=(AddContactValidationForm)pForm;
 		
 		final String firstName = lForm.getFirstName();

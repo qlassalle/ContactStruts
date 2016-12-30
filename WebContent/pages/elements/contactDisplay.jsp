@@ -40,7 +40,7 @@
 						<td><%= contact.getFirstName() %></td>
 						<td><%= contact.getLastName() %></td>
 						<td><%= contact.getEmail() %></td>
-						<td><html:link action ="updateContact.jsp">
+						<td><html:link action ="contact/updateContact.jsp">
 								<html:param name="idContact"><%= contact.getIdContact() %></html:param>
 								<span class = "glyphicon glyphicon-pencil"></span>
 							</html:link>

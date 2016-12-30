@@ -7,6 +7,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessage;
 
+import antlr.StringUtils;
+
 public class LoginValidationForm extends ActionForm {
 
 	/**
@@ -48,9 +50,7 @@ public class LoginValidationForm extends ActionForm {
 		}
 		if(password == null || password.length() < 1){
 			errors.add("password", new ActionMessage("login.password.error.required"));
-		}
+		}		
 		return errors;
 	}
-	
-	
 }

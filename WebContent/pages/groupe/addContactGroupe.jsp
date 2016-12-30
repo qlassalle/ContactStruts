@@ -7,7 +7,7 @@
 <%@page import="models.Contact" %>
 <%@page import="domain.DAOContact" %>
 
-<jsp:include page="../entete.jsp"></jsp:include>
+<jsp:include page="../elements/entete.jsp"></jsp:include>
   
    <html:html>
 

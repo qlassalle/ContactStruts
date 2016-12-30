@@ -9,11 +9,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+
 
 <nav class="navbar navbar-default">
     <div class="row">
@@ -22,7 +23,7 @@
                 <html:link action="/Accueil"><bean:message key="main.accueil"/></html:link>
             </li>
             <li class="col-md-3">
-                <html:link action="createContact.jsp"><bean:message key="main.ajouter"/></html:link>
+                <html:link action="contact/createContact.jsp"><bean:message key="main.ajouter"/></html:link>
             </li>
             <li class="col-md-3">
             	<html:link action = "groupe/createGroupe.jsp"><bean:message key="groupe.ajouter"/></html:link>

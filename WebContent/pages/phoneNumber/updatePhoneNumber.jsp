@@ -4,7 +4,7 @@
 <%@ taglib prefix="nested" uri="http://struts.apache.org/tags-nested" %>
 <%@page import="services.PhoneNumberService"%>
 <%@page import="models.PhoneNumber"%>
-<jsp:include page="../entete.jsp"></jsp:include>
+<jsp:include page="../elements/entete.jsp"></jsp:include>
 
 
 <html:html>

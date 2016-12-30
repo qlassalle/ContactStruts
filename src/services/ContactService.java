@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import domain.DAOContact;
+import exceptions.ContactAlreadyExistsException;
 import models.Address;
 import models.Contact;
 

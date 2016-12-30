@@ -61,3 +61,8 @@ label
 .centeredText {
 	text-align: center!important;
 }
+
+.error {
+	text-align: center;
+	color: red;
+}
