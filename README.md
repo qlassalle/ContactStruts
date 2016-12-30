@@ -1,7 +1,6 @@
 # ContactStruts
 
 # TODO
-- change all SQL requests not using binding
 
 # Done
 - research for many contacts
@@ -10,6 +9,7 @@
 - manage duplicates entries
 - check email address format --> find a regex on the internet. Look for a regex generator software
 - manage errors
+- change all SQL requests not using binding
 
 # Cheminement présentation
 

@@ -42,7 +42,6 @@ public class DAOAddress {
 		return address;
 	}
 
-
 	public int save(String street, String city, String zip, String country) {
 		connexion = GlobalConnection.getInstance();
 		PreparedStatement stmt = null;

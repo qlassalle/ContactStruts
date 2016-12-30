@@ -26,14 +26,15 @@ public class DAOContact {
 		// check if a user doesn't already exist with this email
 		if(emailExists(email)) return MAIL_ERROR;
 		connexion = GlobalConnection.getInstance();
-		Statement stmt;
+		String req = "insert into contact(nom, prenom, email) values(?, ?, ?)";
 		try {
-			stmt = connexion.createStatement();
-			stmt.executeUpdate("insert into contact(nom, prenom, email) values(\"" + nom + "\",\""
-					+ prenom + "\",\"" + email + "\");");
-			stmt.close();
+			try(PreparedStatement pstmt = connexion.prepareStatement(req)) {
+				pstmt.setString(1, nom);
+				pstmt.setString(2, prenom);
+				pstmt.setString(3, email);
+				pstmt.executeUpdate();
+			}
 			return null;
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return e.getMessage();
